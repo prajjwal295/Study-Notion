@@ -14,11 +14,11 @@ const CodeBlock = ({
   codeColor,
 }) => {
   return (
-    <div className={`flex ${position} justify-between my-20 gap-10`}>
+    <div className={`flex ${position} justify-between my-10 gap-10 `}>
       {/* section 1 */}
-      <div className="max-w-[50%] flex flex-col gap-8  items-center">
+      <div className="max-w-[45%] flex flex-col gap-8 ">
         {heading}
-        <div className="mx-auto text-richblack-300  text-center text-xs font-bold ">
+        <div className="mx-auto text-richblack-300  text-center text-s font-bold ">
           {subHeading}
         </div>
         <div className="flex gap-7 my-5">
@@ -38,7 +38,7 @@ const CodeBlock = ({
       {/* section 2 */}
 
       <div
-        className={`flex flex-row h-fit text-[10px] w-[100%] lg:w-[500px] ${backgroundGradient}`}
+        className={`flex flex-row h-fit text-[10px] w-[100%] lg:w-[500px]   backdrop-opacity-5 backdrop-invert `}
       >
         {/* homework bg gradient */}
 

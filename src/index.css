@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.homepage-bg {
+  background: url("https://study-notionmine-cv3r0l8ax-abhinav-awasthis-projects.vercel.app/static/media/bghome.de04eae287ff1d29f0b1.svg");
+}
