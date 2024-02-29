@@ -6,8 +6,8 @@ const tabsName = [
   "Free",
   "New to Coding",
   "Most Popular",
-  "Skill paths",
-  "Career paths",
+  "Skills Paths",
+  "Career Paths",
 ];
 
 const ExploreMore = () => {
@@ -43,6 +43,7 @@ const ExploreMore = () => {
               } hover:bg-richblack-900 hover:text-richblack-5`}
               key={index}
               onClick={() => {
+                 console.log({ tab });
                 setMyCards(tab);
               }}
             >
@@ -55,14 +56,13 @@ const ExploreMore = () => {
         {courses.map((course, index) => {
           return (
             <ExploreCards
-              active={currentCard === course?.heading}
               heading={course?.heading}
               description={course?.description}
               level={course?.level}
               lession={course?.lessionNumber}
-              onClick={() => {
-                setCurrentCard(course);
-              }}
+              key={index}
+              currentCard={currentCard}
+              setCurrentCard={setCurrentCard}
             />
           );
         })}

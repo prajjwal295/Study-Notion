@@ -1,20 +1,32 @@
 import React from "react";
 
-const ExploreCards = ({ active, lession, heading, description, level }) => {
+const ExploreCards = ({
+  currentCard,
+  setCurrentCard,
+  lession,
+  heading,
+  description,
+  level,
+}) => {
   return (
     <div>
       <div
-        className={`flex flex-col ${
-          active
-            ? "bg-white text-black border-spacing-y-96 border-r-[16px] border-b-[16px]  border-yellow-50 "
-            : "bg-[#161d29]"
+        className={`flex flex-col cursor-pointer ${
+          currentCard === heading
+            ? "bg-white text-black shadow-[12px_12px_0_0] shadow-yellow-50 "
+            : "bg-[#161d29] transition-all duration-200 hover:bg-richblack-900"
         } gap-2 p-8 h-[300px] w-[360px] divide-y divide-dashed justify-between`}
+        onClick={() => {
+          setCurrentCard(heading);
+        }}
       >
         <div>
           <h1 className="font-bold text-lg">{heading}</h1>
           <p
             className={`${
-              active ? "text-richblack-300" : "text-richblack-200"
+              currentCard === heading
+                ? "text-richblack-300"
+                : "text-richblack-200"
             } font-medium mt-6`}
           >
             {description}

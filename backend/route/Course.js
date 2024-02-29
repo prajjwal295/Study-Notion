@@ -31,7 +31,7 @@ router.get("/showAllCourses", showAllCourses);
 router.get("/getCourseDetails", getCourseDetails);
 
 router.post("/createCategory", createCategory);
-router.get("/showAllCategorys", showAllCategorys);
+router.get("/showAllCategories", showAllCategorys);
 router.get("/categoryPageDetails", categoryPageDetails);
 
 router.post("/createSection", createSection);
