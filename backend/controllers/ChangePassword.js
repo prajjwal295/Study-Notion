@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const mailSender = require("../utils/mailSend");
-
+const crypto = require("crypto");
+const bcrypt = require("bcrypt")
 // change password forgot password
 
 exports.forgotPasswordToken = async (req, res) => {
@@ -75,12 +76,16 @@ exports.resetPassword = async (req, res) => {
 
     const userDetails = await User.findOne({ token: token });
 
+    
+
     if (!userDetails) {
       return res.status(500).json({
         success: false,
         message: "token is invalid",
       });
     }
+
+    
 
     if (userDetails.forgotPasswordExpires < Date.now()) {
       {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/Logo/Logo-Full-Light.png";
 import CTAbutton from "../core/HomePage/CTAbutton";
 import { IoIosArrowDown } from "react-icons/io";
@@ -9,6 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { UseSelector } from "react-redux";
 import { apiConnector } from "../../services/apiconnector";
 import { categories } from "../../services/apis";
+import { setToken } from "../../utils/authSlice";
+import { setUser } from "../../utils/profileSlice";
+import { logOut } from "../../services/operations/authApi";
+
 
 const NavBar = () => {
   const token = useSelector((state) => state?.auth?.token);
@@ -16,6 +20,8 @@ const NavBar = () => {
   const { item } = useSelector((state) => state.cart);
 
   const [subLinks, setSubLinks] = useState([]);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getSubLinks();
@@ -30,6 +36,9 @@ const NavBar = () => {
       console.log(err);
     }
   };
+
+
+
 
   const location = useLocation();
 
@@ -99,7 +108,22 @@ const NavBar = () => {
             </CTAbutton>
           )}
 
-          <CTAbutton active={false}>Cart</CTAbutton>
+          {token && (
+            <CTAbutton linkTo={"/cart"} active={false}>
+              Cart
+            </CTAbutton>
+          )}
+
+          {token && (
+            <button
+              className="text-center text-[13px] px-6 py-3 rounded-md font-bold transition-all duration-200 hover:scale-95 bg-richblack-800 text-white"
+              onClick={() => {
+                dispatch(logOut(navigate));
+              }}
+            >
+              LogOut
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ const profileSlice = createSlice({
   name: "profile",
   initialState: {
     user:null,
+  
   },
 
   reducers: {
