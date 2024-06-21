@@ -4,7 +4,6 @@ import { categories, endpoints } from "../apis";
 import { setToken, setSignupData } from "../../utils/authSlice";
 import { setUser } from "../../utils/profileSlice";
 
-
 const {
   LOGIN_API,
   SENDOTP_API,
@@ -127,6 +126,8 @@ export function signup(
 
       toast.success("Signup Successfull");
       dispatch(setToken(response.data.token));
+      dispatch(setUser(response.data.user));
+      dispatch(setSignupData(response.data.user));
       navigate("/dashboard/my-profile");
     } catch (error) {
       console.log("Signnp API ERROR............", error);
@@ -137,9 +138,7 @@ export function signup(
   };
 }
 
-export function logOut(
-  navigate
-) {
+export function logOut(navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
 
@@ -147,6 +146,7 @@ export function logOut(
     dispatch(setToken(null));
     dispatch(setUser(null));
 
+    navigate("/");
 
     toast.dismiss(toastId);
   };
@@ -170,6 +170,9 @@ export function login(email, password, navigate) {
 
       toast.success("Login Successfull");
       dispatch(setToken(response.data.token));
+      dispatch(setUser(response.data.user));
+      console.log(response);
+      // localStorage.setItem("user", JSON.stringify(response.data.user));
       navigate("/dashboard/my-profile");
     } catch (error) {
       console.log("LOGIN API ERROR............", error);

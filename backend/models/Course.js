@@ -37,7 +37,7 @@ const courseSchema = new mongoose.Schema({
   ratingAndReviews: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "RatingAndReviews",
+      ref: "ratingAndReviews",
     },
   ],
 
@@ -59,6 +59,10 @@ const courseSchema = new mongoose.Schema({
   tag: {
     type: [String],
     required: true,
+  },
+  status: {
+    type: String,
+    enum: ["Draft", "Published"],
   },
 });
 

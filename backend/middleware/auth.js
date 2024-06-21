@@ -9,7 +9,7 @@ exports.auth = (req, res, next) => {
     const token =
       req.body.token ||
       req.cookies.token ||
-      req.header("Authorisation").replac("Bearer ", "");
+      req.header("Authorization").replace("Bearer ", "");
 
     if (!token) {
       return res.status(401).json({
@@ -22,14 +22,14 @@ exports.auth = (req, res, next) => {
     try {
       // paylod-->
       const decode = jwt.verify(token, process.env.JWT_SECRET);
-      console.log({ decode });
       req.user = decode;
-
     } catch (error) {
-      return res.status(401).json({
-        success: false,
-        message: "token is invalid",
-      });
+      if (error.name === "TokenExpiredError") {
+        return res
+          .status(401)
+          .send({ error: "Token expired.", expiredAt: ex.expiredAt });
+      }
+      return res.status(400).send({ error: "Invalid token." });
     }
 
     next();
@@ -89,8 +89,7 @@ exports.isAdmin = (req, res, next) => {
     return res.status(500).json({
       success: false,
       message: "user role can not be verified",
+      token,
     });
   }
 };
-
-

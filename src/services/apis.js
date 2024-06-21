@@ -14,3 +14,29 @@ export const endpoints = {
 export const contactusEndpoint = {
   CONTACT_US_API: BASE_URL + "/reach/contact",
 };
+
+export const settingsEndpoints = {
+  UPDATE_DISPLAY_PICTURE_API:
+    "http://localhost:4000/api/v1/profile/updateDisplayPicture",
+  UPDATE_PROFILE_API: "http://localhost:4000/api/v1/profile/updateProfile",
+  DELETE_PROFILE_API: "http://localhost:4000/api/v1/profile/deleteProfile",
+};
+
+export const profileEndpoints = {
+  GET_USER_DETAILS_API: BASE_URL + "/profile/getUserDetails",
+  GET_USER_ENROLLED_COURSES_API: BASE_URL + "/profile/getEnrolledCourses",
+  GET_INSTRUCTOR_DATA_API: BASE_URL + "/profile/instructorDashboard",
+};
+
+export const courseEndPoints = {
+  CREATE_COURSE: BASE_URL + "/course/createCourse",
+  DELETE_COURSE_API: BASE_URL + "/course/deleteCourse",
+  UPDATE_COURSE_API: BASE_URL + "/course/updateCourse",
+  CREATE_SECTION_API: BASE_URL + "/course/createSection",
+  UPDATE_SECTION_API: BASE_URL + "/course/updateSection",
+  DELETE_SECTION_API: BASE_URL + "/course/deleteSection",
+  CREATE_SUBSECTION_API: BASE_URL + "/course/createSubSection",
+  UPDATE_SUBSECTION_API: BASE_URL + "/course/updateSubSection",
+  DELETE_SUBSECTION_API: BASE_URL + "/course/deleteSubSection",
+  GET_ALL_INSTRUCTOR_COURSES_API: BASE_URL + "/course/getInstructorCourses",
+};

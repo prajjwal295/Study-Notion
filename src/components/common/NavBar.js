@@ -46,84 +46,61 @@ const NavBar = () => {
     return matchPath({ path: route }, location.pathname);
   };
   return (
-    <div className="flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 text-white">
+    <div
+      className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 ${
+        location.pathname !== "/" ? "bg-richblack-800" : ""
+      } transition-all duration-200`}
+    >
       <div className="flex w-11/12 max-w-maxContent items-center justify-between">
         <Link to="/">
-          <img src={logo} alt="logo" width={160} height={42} loading="lazy" />
+          <img src={logo} alt="logo" width={160} height={32} loading="lazy" />
         </Link>
 
         {/* Nav Links */}
 
-        <div className="flex gap-6 ">
-          <div
-            className={`${
-              matchRoute("/") ? "text-yellow-25" : "text-richblack-50"
-            }`}
-          >
-            <Link to="/">Home</Link>
-          </div>
+        <div className=" gap-6 hidden md:block">
+          <div className="flex gap-x-6 text-richblack-25">
+            <div
+              className={`${
+                matchRoute("/") ? "text-yellow-25" : "text-richblack-50"
+              }`}
+            >
+              <Link to="/">Home</Link>
+            </div>
 
-          <div
-            className={` text-richblack-50 flex gap-1 items-center relative group cursor-pointer`}
-          >
-            Catelog
-            <IoIosArrowDown />
-            <div className="invisible absolute left-[50%] translate-x-[-50%] translate-y-[60%] flex flex-col rounded-md bg-richblack-5 text-richblack-900 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 lg:w-[300px] p-2 z-10">
-              {subLinks?.length &&
-                subLinks?.map((list, index) => (
-                  <Link to={`/${list?.name}`}>
-                    <div key={index}>
-                      <h1>{list?.name}</h1>
-                    </div>
-                  </Link>
-                ))}
+            <div
+              className={` text-richblack-50 flex gap-1 items-center relative group cursor-pointer`}
+            >
+              Catelog
+              <IoIosArrowDown />
+              <div className="invisible absolute left-[50%] translate-x-[-50%] translate-y-[60%] flex flex-col rounded-md bg-richblack-5 text-richblack-900 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 lg:w-[300px] p-2 z-10">
+                {subLinks?.length &&
+                  subLinks?.map((list, index) => (
+                    <Link to={`/${list?.name}`}>
+                      <div key={index}>
+                        <h1>{list?.name}</h1>
+                      </div>
+                    </Link>
+                  ))}
+              </div>
+            </div>
+
+            <div
+              className={`${
+                matchRoute("/about") ? "text-yellow-25" : "text-richblack-50"
+              }`}
+            >
+              <Link to="/about">About Us</Link>
+            </div>
+            <div
+              className={`${
+                matchRoute("/contact") ? "text-yellow-25" : "text-richblack-50"
+              }`}
+            >
+              <Link to="/contact">Contact Us</Link>
             </div>
           </div>
 
-          <div
-            className={`${
-              matchRoute("/about") ? "text-yellow-25" : "text-richblack-50"
-            }`}
-          >
-            <Link to="/about">About Us</Link>
-          </div>
-          <div
-            className={`${
-              matchRoute("/contact") ? "text-yellow-25" : "text-richblack-50"
-            }`}
-          >
-            <Link to="/contact">Contact Us</Link>
-          </div>
-        </div>
-
-        <div className="flex gap-2 ">
-          {!token && (
-            <CTAbutton active={false} linkTo={"/login"}>
-              Login
-            </CTAbutton>
-          )}
-          {!token && (
-            <CTAbutton active={false} linkTo={"/signin"}>
-              Sign in
-            </CTAbutton>
-          )}
-
-          {token && (
-            <CTAbutton linkTo={"/cart"} active={false}>
-              Cart
-            </CTAbutton>
-          )}
-
-          {token && (
-            <button
-              className="text-center text-[13px] px-6 py-3 rounded-md font-bold transition-all duration-200 hover:scale-95 bg-richblack-800 text-white"
-              onClick={() => {
-                dispatch(logOut(navigate));
-              }}
-            >
-              LogOut
-            </button>
-          )}
         </div>
       </div>
     </div>

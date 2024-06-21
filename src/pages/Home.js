@@ -9,6 +9,7 @@ import LearningLanguage from "../components/core/HomePage/LearningLanguage";
 import InstructorPage from "../components/core/HomePage/InstructorPage";
 import ExploreMore from "../components/core/HomePage/ExploreMore";
 import Footer from "../components/common/Footer";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 const Home = () => {
   return (
@@ -16,10 +17,10 @@ const Home = () => {
       {/* {section1} */}
       <div className="relative mx-auto flex flex-col w-11/12 items-center max-w-maxContent text-white justify-between">
         <Link to={"/signup"}>
-          <div className="group mx-auto bg-[rgba(20,26,35,255)] rounded-full font-bold transition-all duration-200 hover:scale-95 mt-14">
-            <div className="flex justify-between p-2 items-center transition-all duration-200 rounded-full group-hover:bg-richblack-800">
-              <p className="mr-2">Become an Instructor</p>
-              <FaArrowRight />
+          <div className="group mx-auto mt-10 w-fit rounded-full bg-richblack-800 p-1 font-bold text-richblack-200 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 hover:drop-shadow-none">
+            <div className="flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-900">
+              <p>Become an Instructor / Start Learning</p>
+              <AiOutlineArrowRight />
             </div>
           </div>
         </Link>
@@ -51,9 +52,9 @@ const Home = () => {
           </video>
         </div>
 
-        <div className="w-[90%] flex flex-col mb-96">
+        <div className="w-[90%] flex flex-col">
           <CodeBlock
-            position={"flex-row"}
+            position={"lg:flex-row"}
             heading={
               <div className="mx-auto font-semibold text-3xl">
                 Unnlock Your
@@ -80,7 +81,7 @@ const Home = () => {
           ></CodeBlock>
 
           <CodeBlock
-            position={"flex flex-row-reverse"}
+            position={"lg:flex-row-reverse"}
             heading={
               <div className="mx-auto font-semibold text-3xl">
                 Start
@@ -160,7 +161,7 @@ const Home = () => {
         <InstructorPage />
       </div>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 };

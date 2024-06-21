@@ -18,10 +18,6 @@ const Login = () => {
 
     dispatch(login(user?.email, user?.password, navigate));
 
-    setUser({
-      email: "",
-      password: "",
-    });
   };
   return (
     <div>

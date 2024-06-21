@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { HomePageExplore } from "../../../data/homepage-explore";
 import ExploreCards from "./ExploreCards";
+import HighLightText from "./HighlightText";
 
 const tabsName = [
   "Free",
-  "New to Coding",
-  "Most Popular",
-  "Skills Paths",
-  "Career Paths",
+  "New to coding",
+  "Most popular",
+  "Skill paths",
+  "Career paths",
 ];
-
 const ExploreMore = () => {
   const [currentTab, setCurrentTab] = useState(tabsName[0]);
   const [courses, setCourses] = useState(HomePageExplore[0].courses);
@@ -19,48 +19,53 @@ const ExploreMore = () => {
 
   const setMyCards = (value) => {
     setCurrentTab(value);
+    // Filtering course on the basis of tag
     const result = HomePageExplore.filter((course) => course.tag === value);
-    setCourses(result[0]?.courses);
-    setCurrentCard(result[0]?.courses[0]?.heading);
+    setCourses(result[0].courses);
+    setCurrentCard(result[0].courses[0].heading);
   };
   return (
-    <div className="flex flex-col gap-2 items-center absolute -bottom-48">
-      <div className="flex gap-2 font-bold text-4xl mb-5">
-        <p>Unlock the</p>
-        <span className="text-richblue-200">Power of Code</span>
+    <div>
+      <div className="text-4xl font-semibold text-center">
+        Unlock the
+        <HighLightText text={"Power of code"} />
       </div>
+      <p className="text-center text-richblack-300 text-sm text-[16px] mt-3 ">
+        Learn to build anything you can imagine
+      </p>
 
-      <p>Learn to Build Anything You Can Imagine</p>
-
-      <div className="flex mt-4 gap-2  bg-[#161d29] rounded-full border-richblack-100 ">
-        {tabsName.map((tab, index) => {
+      <div
+        className="flex flex-row rounded-full bg-richblack-800 mb-5 mt-5 border-richblack-100
+        px-1 py-1"
+      >
+        {tabsName.map((element, index) => {
           return (
             <div
-              className={`p-3 mx-2 text-sm rounded-full duration-200 cursor-pointer text-[16px] flex items-center gap-2 ${
-                currentTab === tab
-                  ? "bg-richblack-900 text-richblack-5 font-medium"
-                  : "text-richblack-200"
-              } hover:bg-richblack-900 hover:text-richblack-5`}
+              className={`text-[16px] flex flex-row items-center gap-2
+                        ${
+                          currentTab === element
+                            ? "bg-richblack-900 text-richblack-5 font-medium"
+                            : "text-richblack-200"
+                        } rounded-full transition-all duration-200 cursor-pointer
+                        hover:bg-richblack-900 hover:text-richblack-5 px-7 py-2`}
               key={index}
-              onClick={() => {
-                 console.log({ tab });
-                setMyCards(tab);
-              }}
+              onClick={() => setMyCards(element)}
             >
-              {tab}
+              {element}
             </div>
           );
         })}
       </div>
-      <div className="flex gap-12 my-10 ">
-        {courses.map((course, index) => {
+      <div className="lg:h-[150px]"></div>
+
+      {/* Course-card group */}
+      {/* Cards Group */}
+      <div className="lg:absolute gap-10 justify-center lg:gap-0 flex lg:justify-between flex-wrap w-full lg:bottom-[0] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[50%] text-black lg:mb-0 mb-7 lg:px-0 px-3">
+        {courses.map((ele, index) => {
           return (
             <ExploreCards
-              heading={course?.heading}
-              description={course?.description}
-              level={course?.level}
-              lession={course?.lessionNumber}
               key={index}
+              cardData={ele}
               currentCard={currentCard}
               setCurrentCard={setCurrentCard}
             />

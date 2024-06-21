@@ -5,65 +5,79 @@ import logo3 from "../../../assets/TimeLineLogo/Logo3.svg";
 import logo4 from "../../../assets/TimeLineLogo/Logo4.svg";
 import TimeLineLogo from "../../../assets/Images/TimelineImage.png";
 
-const timeline = [
+const TimeLine = [
   {
-    logo: logo1,
-    heading: "Leadership",
-    description: "fully commited to the success company",
+    Logo: logo1,
+    Heading: "Leadership",
+    Description: "fully commited to the success company",
   },
   {
-    logo: logo2,
-    heading: "Responsibility",
-    description: "Students will always be our top priority",
+    Logo: logo2,
+    Heading: "Responsibility",
+    Description: "Students will always be our top priority",
   },
   {
-    logo: logo3,
-    heading: "Flexibility",
-    description: "The ability to switch is an important skills",
+    Logo: logo3,
+    Heading: "Flexibility",
+    Description: "The ability to switch is an important skills",
   },
   {
-    logo: logo4,
-    heading: "Solve the problem",
-    description: "Code your way to a solution",
+    Logo: logo4,
+    Heading: "Solve the problem",
+    Description: "Code your way to a solution",
   },
 ];
 
 const TimelineSection = () => {
   return (
     <div>
-      <div className="flex justify-between gap-28 items-center w-full">
-        <div className="flex flex-col gap-10 items-start">
-          {timeline.map((element, index) => {
+      <div className="flex flex-col lg:flex-row gap-20 mb-20 items-center">
+        <div className="lg:w-[45%] flex flex-col gap-14 lg:gap-3">
+          {TimeLine.map((ele, i) => {
             return (
-              <div className="flex flex-row gap-6 items-center p-2" key={index}>
-                <div className="shadow-lg rounded-full">
-                  <img
-                    src={element.logo}
-                    className="p-4  h-16 w-16 rounded-full"
-                  />
+              <div className="flex flex-col lg:gap-3" key={i}>
+                <div className="flex gap-6" key={i}>
+                  <div className="w-[52px] h-[52px] bg-white rounded-full flex justify-center items-center shadow-[#00000012] shadow-[0_0_62px_0]">
+                    <img src={ele.Logo} alt="" />
+                  </div>
+                  <div>
+                    <h2 className="font-semibold text-[18px]">{ele.Heading}</h2>
+                    <p className="text-base">{ele.Description}</p>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <h1 className="font-bold text-lg">{element.heading}</h1>
-                  <p className="semibold text-sm">{element.description}</p>
-                </div>
+                <div
+                  className={`hidden ${
+                    TimeLine.length - 1 === i ? "hidden" : "lg:block"
+                  }  h-14 border-dotted border-r border-richblack-100 bg-richblack-400/0 w-[26px]`}
+                ></div>
               </div>
             );
           })}
         </div>
-        <div className="relative shadow-2xl shadow-blue-400 ">
-          <div className="w-[600px]">
-            <img src={TimeLineLogo} className="w-full"></img>
-          </div>
-          <div className="absolute bg-[#014a32] flex text-white uppercasepy-10 w-[80%] left-[50%] justify-between h-[100px] translate-x-[-50%] translate-y-[-50%]">
-            <div className="flex items-center justify-between px-5 text-center">
-              <p className="font-bold text-3xl">10</p>
-              <p className="font-bold text-2xl w-[50%]">Years of experience</p>
+        <div className="relative w-fit h-fit shadow-blue-200 shadow-[0px_0px_30px_0px]">
+          <div className="absolute lg:left-[50%] lg:bottom-0 lg:translate-x-[-50%] lg:translate-y-[50%] bg-caribbeangreen-700 flex lg:flex-row flex-col text-white uppercase py-5 gap-4 lg:gap-0 lg:py-10 ">
+            {/* Section 1 */}
+            <div className="flex gap-5 items-center lg:border-r border-caribbeangreen-300 px-7 lg:px-14">
+              <h1 className="text-3xl font-bold w-[75px]">10</h1>
+              <h1 className="text-caribbeangreen-300 text-sm w-[75px]">
+                Years experiences
+              </h1>
             </div>
-            <div className="flex items-center justify-between  px-5">
-              <p className="font-bold text-3xl">250</p>
-              <p className="font-bold text-2xl w-[50%]">Type of courses</p>
+
+            {/* Section 2 */}
+            <div className="flex gap-5 items-center lg:px-14 px-7">
+              <h1 className="text-3xl font-bold w-[75px]">250</h1>
+              <h1 className="text-caribbeangreen-300 text-sm w-[75px]">
+                types of courses
+              </h1>
             </div>
+            <div></div>
           </div>
+          <img
+            src={TimeLineLogo}
+            alt="timelineImage"
+            className="shadow-white shadow-[20px_20px_0px_0px] object-cover h-[400px] lg:h-fit"
+          />
         </div>
       </div>
     </div>

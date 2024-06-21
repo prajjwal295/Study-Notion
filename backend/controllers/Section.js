@@ -42,10 +42,10 @@ exports.createSection = async (req, res) => {
 exports.updateSection = async (req, res) => {
   try {
     // data input
-    const { sectionName, sectionId } = req.body;
+    const { sectionName, sectionId, courseId } = req.body;
     // data validation
 
-    if (!sectionName || !sectionId) {
+    if (!sectionName || !sectionId || !courseId) {
       return res.status(400).json({
         success: false,
         message: "All fields required",
@@ -61,12 +61,21 @@ exports.updateSection = async (req, res) => {
       { new: true }
     );
 
+    const updatedCourse = await Course.findById(courseId)
+      .populate({
+        path: "courseContent",
+        populate: {
+          path: "subSection",
+        },
+      })
+      .exec();
+
     // return res
 
     return res.status(200).json({
       success: true,
       message: "Section updation sucessfully",
-      updateSection,
+      updatedCourse,
     });
   } catch (err) {
     return res.status(400).json({
@@ -80,7 +89,7 @@ exports.deleteSection = async (req, res) => {
   try {
     // get section id
     // assuming  sending id in params
-    const { sectionId } = req.params;
+    const { sectionId, courseId } = req.body;
 
     if (!sectionId) {
       return res.status(400).json({
@@ -89,6 +98,18 @@ exports.deleteSection = async (req, res) => {
       });
     }
 
+    const updatedCourseDetails = await Course.findByIdAndUpdate(
+      courseId,
+      {
+        $pull: {
+          courseContent: sectionId,
+        },
+      },
+      { new: true }
+    )
+      .populate("courseContent")
+      .exec();
+
     // delete section
     // do we need to delete from course schema??
     await Section.findByIdAndDelete(sectionId);
@@ -96,6 +117,7 @@ exports.deleteSection = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Section deletion sucessfully",
+      updatedCourseDetails,
     });
   } catch (err) {
     return res.status(400).json({

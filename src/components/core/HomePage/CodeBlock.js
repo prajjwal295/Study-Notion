@@ -2,6 +2,7 @@ import React from "react";
 import CTAbutton from "./CTAbutton";
 import { FaArrowRight } from "react-icons/fa";
 import { TypeAnimation } from "react-type-animation";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 const CodeBlock = ({
   position,
@@ -14,35 +15,33 @@ const CodeBlock = ({
   codeColor,
 }) => {
   return (
-    <div className={`flex ${position} justify-between my-10 gap-10 `}>
-      {/* section 1 */}
-      <div className="max-w-[45%] flex flex-col gap-8 ">
+    <div
+      className={`flex ${position} my-20 justify-between flex-col lg:gap-10 gap-10`}
+    >
+      <div className="w-[100%] lg:w-[50%] flex flex-col gap-8">
         {heading}
-        <div className="mx-auto text-richblack-300  text-center text-s font-bold ">
+        <div className="text-richblack-300 text-base font-bold w-[85%] -mt-3">
           {subHeading}
         </div>
-        <div className="flex gap-7 my-5">
-          <CTAbutton active={ctabtn1.active} linkTo={ctabtn1.linkTo}>
+
+        <div className="flex gap-7 mt-7">
+          <CTAbutton active={ctabtn1.active} linkto={ctabtn1.linkto}>
             <div className="flex gap-2 items-center">
               {ctabtn1.btnText}
-              <FaArrowRight />
+              {AiOutlineArrowRight}
             </div>
           </CTAbutton>
 
-          <CTAbutton active={ctabtn2.active} linkTo={ctabtn2.linkTo}>
+          <CTAbutton active={ctabtn2.active} linkto={ctabtn2.linkto}>
             {ctabtn2.btnText}
           </CTAbutton>
         </div>
       </div>
 
-      {/* section 2 */}
-
-      <div
-        className={`flex flex-row h-fit text-[10px] w-[100%] lg:w-[500px]   backdrop-opacity-5 backdrop-invert `}
-      >
-        {/* homework bg gradient */}
-
-        <div className="text-center flex flex-col w-[10%] text-richblack-400 font-inter font-bold">
+      <div className="h-fit code-border flex flex-row py-3 text-[10px] sm:text-sm leading-[18px] sm:leading-6 relative w-[100%] lg:w-[470px]">
+        {/*Create Gradient*/}
+        {backgroundGradient}
+        <div className="text-center flex flex-col w-[10%] select-none text-richblack-400 font-inter font-bold">
           <p>1</p>
           <p>2</p>
           <p>3</p>
@@ -54,22 +53,24 @@ const CodeBlock = ({
           <p>9</p>
           <p>10</p>
           <p>11</p>
-          <p>12</p>
         </div>
+
         <div
-          className={`text-xs font-semibold w-[90%] flex flex-col gap-2 font-mono ${codeColor} pr-2`}
+          className={`w-[90%] flex flex-col gap-2 font-bold font-mono ${codeColor} pr-1`}
         >
           <TypeAnimation
-            sequence={[codeBlock, 2000, ""]}
-            cursor={true}
+            sequence={[codeBlock, 1000, ""]}
             repeat={Infinity}
-            style={{ whiteSpace: "pre-line", display: "block" }}
+            cursor={true}
             omitDeletionAnimation={true}
+            style={{
+              whiteSpace: "pre-line",
+              display: "block",
+            }}
           />
         </div>
       </div>
     </div>
   );
 };
-
 export default CodeBlock;

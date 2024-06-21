@@ -57,11 +57,20 @@ const VerifyEmail = () => {
             value={otp}
             onChange={setOtp}
             numInputs={6}
-            renderSeparator={<span className="mx-2 flex items-center ">.</span>}
             renderInput={(props) => (
-              <input {...props} className="bg-richblack-600 text-richblack-25 rounded-sm" />
+              <input
+                {...props}
+                placeholder="-"
+                style={{
+                  boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                }}
+                className="w-[48px] lg:w-[60px] border-0 bg-richblack-800 rounded-[0.5rem] text-richblack-5 aspect-square text-center focus:border-0 focus:outline-2 focus:outline-yellow-50"
+              />
             )}
-        
+            containerStyle={{
+              justifyContent: "space-between",
+              gap: "0 6px",
+            }}
           />
 
           <button
