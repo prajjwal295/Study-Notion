@@ -1,9 +1,9 @@
 {
     "version": 2,
-    "name": "music-album",
+    "name": "study-notion",
     "builds": [
         {
-            "src": "app.js",
+            "src": "*.js",
             "use": "@vercel/node"
         }
     ],
