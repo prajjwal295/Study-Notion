@@ -1,4 +1,4 @@
-const RatingAndReview = require("../models/RatingAndReviews");
+const ratingAndReviews = require("../models/RatingAndReviews");
 const Course = require("../models/Course");
 const User = require(".../models/User");
 const { default: mongoose } = require("mongoose");
@@ -30,7 +30,7 @@ exports.createRatingAndReviews = async (req, res) => {
 
     // check if user already reviewed or not
 
-    const alreadyReviewd = await RatingAndReview.findOne({
+    const alreadyReviewd = await ratingAndReviews.findOne({
       user: userId,
       course: courseId,
     });
@@ -43,7 +43,7 @@ exports.createRatingAndReviews = async (req, res) => {
     }
 
     // create review
-    const ratingReview = await RatingAndReview.create({
+    const ratingReview = await ratingAndReviews.create({
       rating,
       review,
       course: courseId,

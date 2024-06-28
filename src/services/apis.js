@@ -2,6 +2,7 @@ const BASE_URL = "http://localhost:4000/api/v1";
 
 export const categories = {
   CATEGORIES_API: `${BASE_URL}/course/showAllCategories`,
+  CATEGORIES_PAGEDETAILS_API: `${BASE_URL}/course/categoryPageDetails`,
 };
 
 export const endpoints = {
@@ -11,6 +12,8 @@ export const endpoints = {
   RESETPASSTOKEN_API: BASE_URL + "/auth/reset-password-token",
   RESETPASSWORD_API: BASE_URL + "/auth/reset-password",
 };
+
+
 export const contactusEndpoint = {
   CONTACT_US_API: BASE_URL + "/reach/contact",
 };
@@ -32,6 +35,7 @@ export const courseEndPoints = {
   CREATE_COURSE: BASE_URL + "/course/createCourse",
   DELETE_COURSE_API: BASE_URL + "/course/deleteCourse",
   UPDATE_COURSE_API: BASE_URL + "/course/updateCourse",
+  GET_COURSEDETAILS_API: BASE_URL + "/course/getCourseDetails",
   CREATE_SECTION_API: BASE_URL + "/course/createSection",
   UPDATE_SECTION_API: BASE_URL + "/course/updateSection",
   DELETE_SECTION_API: BASE_URL + "/course/deleteSection",

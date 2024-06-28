@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { fetchCourseCategories } from "../../../../../services/operations/CourseApi";
+import {
+  fetchCourseCategories,
+  updateCourse,
+} from "../../../../../services/operations/CourseApi";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { HiOutlineCurrencyRupee } from "react-icons/hi";
@@ -48,6 +51,21 @@ const CourseInformationForm = () => {
   }, []);
 
   const isFormUpdated = () => {
+    const currentValues = getValues();
+    // console.log("changes after editing form values:", currentValues)
+    if (
+      currentValues.courseTitle !== course.courseName ||
+      currentValues.courseShortDesc !== course.courseDescription ||
+      currentValues.coursePrice !== course.price ||
+      currentValues.courseTags.toString() !== course.tag.toString() ||
+      currentValues.courseBenefits !== course.whatYouWillLearn ||
+      currentValues.courseCategory._id !== course.category._id ||
+      currentValues.courseRequirements.toString() !==
+        course.instructions.toString() ||
+      currentValues.courseImage !== course.thumbnail
+    ) {
+      return true;
+    }
     return false;
   };
 
@@ -96,7 +114,7 @@ const CourseInformationForm = () => {
         }
         console.log("Edit Form data: ", formData);
         setLoading(true);
-        const result = await createCourse(formData, token);
+        const result = await updateCourse(formData, token);
         setLoading(false);
         if (result) {
           dispatch(setStep(2));

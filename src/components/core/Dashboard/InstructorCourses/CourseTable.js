@@ -23,8 +23,8 @@ export default function CourseTable({ courses, setCourses }) {
 
   const handleCourseDelete = async (courseId) => {
     setLoading(true);
-    const result = await deleteCourse({ courseId: courseId }, token);
-    // const result = await fetchInstructorCourses(token);
+    await deleteCourse({ courseId: courseId }, token);
+    const result = await fetchInstructorCourses(token);
     if (result) {
       setCourses(result);
     }
@@ -32,7 +32,7 @@ export default function CourseTable({ courses, setCourses }) {
     setLoading(false);
   };
 
-  // console.log("All Course ", courses)
+  console.log("All Course ", courses);
 
   return (
     <>

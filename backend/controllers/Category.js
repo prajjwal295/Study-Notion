@@ -57,7 +57,7 @@ exports.showAllCategorys = async (req, res) => {
 exports.categoryPageDetails = async (req, res) => {
   try {
     // get category id;
-    const { categoryId } = req.body;
+    const { categoryId } = req.query;
 
     // get all course by category id
 
@@ -71,6 +71,8 @@ exports.categoryPageDetails = async (req, res) => {
 
     // validation
 
+    console.log({ selectedCategory });
+
     if (!selectedCategory) {
       return res.status(404).json({
         success: false,
@@ -81,40 +83,42 @@ exports.categoryPageDetails = async (req, res) => {
     // get courses from diff category
     // { $ne: categoryId } not equal to
 
-    const differentCategories = await Category.findById({
-      _id: { $ne: categoryId },
-    })
-      .populate("course")
-      .exec();
+    // const differentCategories = await Category.findById({
+    //   _id: { $ne: categoryId },
+    // })
+    //   .populate("course")
+    //   .exec();
 
     // get top selling courses
+    console.log("a");
 
-    const topSellingCourse = await Course.aggregate([
-      {
-        $project: {
-          courseName: 1,
-          studentEnrolledCount: { $size: "$studentEnrolled" },
-        },
-      },
-      {
-        $sort: { studentEnrolledCount: -1 },
-      },
-      {
-        $limit: 10, // You can adjust the limit based on your requirements
-      },
-    ]);
+    // const topSellingCourse = await Course.aggregate([
+    //   {
+    //     $project: {
+    //       courseName: 1,
+    //       studentEnrolledCount: { $size: "$studentEnrolled" },
+    //     },
+    //   },
+    //   {
+    //     $sort: { studentEnrolledCount: -1 },
+    //   },
+    //   {
+    //     $limit: 10, // You can adjust the limit based on your requirements
+    //   },
+    // ]);
+    // console.log({ topSellingCourse });
 
     return res.status(200).json({
       success: true,
       message: "Data found ",
       categoryPageDetails,
-      differentCategories,
-      topSellingCourse,
+      // differentCategories,
+      // topSellingCourse,
     });
   } catch (err) {
     return res.status(404).json({
       success: false,
-      message: "Data not found",
+      message: "All Data not found",
     });
   }
 };

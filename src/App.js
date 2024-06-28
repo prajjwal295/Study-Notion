@@ -18,6 +18,9 @@ import Cart from "./components/core/Dashboard/Cart";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 import AddCourse from "./components/core/Dashboard/AddCourse";
 import MyCourses from "./components/core/Dashboard/MyCourses";
+import EditCourse from "./components/core/Dashboard/EditCourse";
+import Instructor from "./components/core/Dashboard/InstructorDashboard/Instructor";
+import Catalog from "./pages/Catelog";
 
 
 const App = () => {
@@ -34,6 +37,7 @@ const App = () => {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="catalog/:catalogName" element={<Catalog />} />
         {/* <Route path="/dashboard" element={<Dashboard />}>
           <Route path="my-profile" element={<Profile />} />
           <Route path="enrolled-courses" element={<EnrolledCourses />} />
@@ -52,20 +56,20 @@ const App = () => {
             <Route path="dashboard/cart" element={<Cart />} />
           )}
           {user !== null && user.accountType === ACCOUNT_TYPE.STUDENT && (
-           <Route
+            <Route
               path="dashboard/enrolled-courses"
               element={<EnrolledCourses />}
             />
           )}
           {user !== null && user.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
             <>
-              {/* <Route path="dashboard/instructor" element={<Instructor />} /> */}
+              <Route path="dashboard/instructor" element={<Instructor />} />
               <Route path="dashboard/add-course" element={<AddCourse />} />
               <Route path="dashboard/my-courses" element={<MyCourses />} />
-              {/* <Route
+              <Route
                 path="dashboard/edit-course/:courseId"
                 element={<EditCourse />}
-              /> */}
+              />
             </>
           )}
         </Route>
