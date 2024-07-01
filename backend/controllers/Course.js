@@ -3,7 +3,6 @@ const Category = require("../models/Category");
 const Section = require("../models/Section");
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
-const { updateCourse } = require("../../src/services/operations/CourseApi");
 const mongoose = require("mongoose");
 const SubSection = require("../models/SubSection");
 // const jwt = require("jsonwebtoken");
