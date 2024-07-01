@@ -1,7 +1,7 @@
 {
-  "name": "Study Notion by Prajjwal Mishra",
+  "name": "study-notion",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "dependencies": {
     "@ramonak/react-progress-bar": "^5.2.0",
     "@reduxjs/toolkit": "^2.2.1",
