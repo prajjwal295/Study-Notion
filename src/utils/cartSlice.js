@@ -28,18 +28,28 @@ const cartSlice = createSlice({
 
       state.cart.push(course);
       state.totalItems++;
-      state.total += course.amount;
+      state.total += course.price;
     },
+
     removeFromCart(state, action) {
       const data = state.cart.findIndex(
         (item) => item._id === action.payload._id
       );
 
+      state.total -= 11;
+      state.totalItems--;
+
       state.cart.pop(data);
+    },
+
+    resetCart(state, action) {
+      state.course = [];
+      state.totalItems = 0;
+      state.total = 0;
     },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart ,resetCart} = cartSlice.actions;
 
 export default cartSlice.reducer;

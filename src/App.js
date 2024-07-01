@@ -21,6 +21,7 @@ import MyCourses from "./components/core/Dashboard/MyCourses";
 import EditCourse from "./components/core/Dashboard/EditCourse";
 import Instructor from "./components/core/Dashboard/InstructorDashboard/Instructor";
 import Catalog from "./pages/Catelog";
+import CourseDetails from "./pages/CourseDetails";
 
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="catalog/:catalogName" element={<Catalog />} />
+        <Route path="courses/:courseId" element={<CourseDetails />} />
         {/* <Route path="/dashboard" element={<Dashboard />}>
           <Route path="my-profile" element={<Profile />} />
           <Route path="enrolled-courses" element={<EnrolledCourses />} />

@@ -6,6 +6,7 @@ import { removeFromCart } from "../../../../utils/cartSlice";
 
 export default function RenderCartCourses() {
   const { cart } = useSelector((state) => state.cart);
+  console.log(cart)
   const dispatch = useDispatch();
   return (
     <div className="flex flex-1 flex-col">

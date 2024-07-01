@@ -44,3 +44,9 @@ export const courseEndPoints = {
   DELETE_SUBSECTION_API: BASE_URL + "/course/deleteSubSection",
   GET_ALL_INSTRUCTOR_COURSES_API: BASE_URL + "/course/getInstructorCourses",
 };
+
+export const studentEndpoints = {
+  COURSE_PAYMENT_API: BASE_URL + "/payment/capturePayment",
+  COURSE_VERIFY_API: BASE_URL + "/payment/verifyPayment",
+  SEND_PAYMENT_SUCCESS_EMAIL_API: BASE_URL + "/payment/sendPaymentSuccessEmail",
+};

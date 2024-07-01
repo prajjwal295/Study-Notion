@@ -118,7 +118,7 @@ exports.createCourse = async (req, res) => {
       },
       {
         $push: {
-          courses: newCourse._id,
+          course: newCourse._id,
         },
       },
       {

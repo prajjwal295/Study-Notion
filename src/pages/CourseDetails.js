@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { buyCourse } from "../services/operations/studentFeaturesAPI";
-import { fetchCourseDetails } from "../services/operations/courseDetailsAPI";
-import { setCourse } from "../slices/courseSlice";
-import GetAvgRating from "../utils/avgRating";
+// import { buyCourse } from "../services/operations/studentFeaturesAPI";
+import { getFullDetailsOfCourse } from "../services/operations/CourseApi";
+import { setCourse } from "../utils/courseSlice";
+// import GetAvgRating from "../utils/avgRating";
 import Error from "./Error";
 import ConfirmationModal from "../components/common/ConfirmationModal";
-import RatingStars from "../components/common/RatingStars";
-import { formatDate } from "../services/formatDate";
-
+// import RatingStars from "../components/common/RatingStars";
+import { formatDate } from "../services/FormatDate";
 import CourseDetailsCard from "../components/core/Course/CourseDetailsCard";
 
 const CourseDetails = () => {
@@ -27,8 +26,7 @@ const CourseDetails = () => {
   useEffect(() => {
     const getCourseFullDetails = async () => {
       try {
-        const result = await fetchCourseDetails(courseId);
-        console.log("Printing CourseData-> ", result);
+        const result = await getFullDetailsOfCourse(courseId);
         setCourseData(result);
         if (loadingf == true) {
           setloadingf(false);
@@ -40,12 +38,14 @@ const CourseDetails = () => {
     getCourseFullDetails();
   }, [courseId]);
 
+  console.log(courseData);
+
   const [avgReviewCount, setAverageReviewCount] = useState(0);
 
   useEffect(() => {
     if (!loadingf) {
-      const count = GetAvgRating(courseData.data[0].ratingAndReviews);
-      setAverageReviewCount(count);
+    //   const count = GetAvgRating(courseData.data[0].ratingAndReviews);
+    //   setAverageReviewCount(count);
     }
   }, [courseData]);
 
@@ -53,8 +53,8 @@ const CourseDetails = () => {
   useEffect(() => {
     if (!loadingf) {
       let lectures = 0;
-      courseData.data[0].courseContent.forEach((sec) => {
-        lectures += sec.subSection.length || 0;
+      courseData?.courseContent?.forEach((sec) => {
+        lectures += sec?.subSection?.length || 0;
       });
       setTotalNoOfLectures(lectures);
     }
@@ -71,7 +71,7 @@ const CourseDetails = () => {
 
   const handleBuyCourse = () => {
     if (token) {
-      buyCourse(token, [courseId], user, navigate, dispatch);
+    //   buyCourse(token, [courseId], user, navigate, dispatch);
       return;
     }
     setConfirmationModal({
@@ -88,13 +88,13 @@ const CourseDetails = () => {
     return <div>Loading...</div>;
   }
 
-  if (!courseData.success) {
-    return (
-      <div>
-        <Error />
-      </div>
-    );
-  }
+//   if (!courseData.success) {
+//     return (
+//       <div>
+//         <Error />
+//       </div>
+//     );
+//   }
   const {
     courseName,
     courseDescription,
@@ -104,7 +104,7 @@ const CourseDetails = () => {
     instructor,
     studentsEnrolled,
     createdAt,
-  } = courseData.data[0];
+  } = courseData;
 
   return (
     <div className="flex flex-col  text-white">
@@ -113,13 +113,13 @@ const CourseDetails = () => {
         <p>{courseDescription}</p>
         <div className="flex gap-x-2">
           <span>{avgReviewCount}</span>
-          <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
+          {/* <RatingStars Review_Count={avgReviewCount} Star_Size={24} /> */}
           <span>{`(${ratingAndReviews?.length} reviews) `}</span>
-          <span>{`(${studentsEnrolled.length} students enrolled)`}</span>
+          <span>{`(${studentsEnrolled?.length} students enrolled)`}</span>
         </div>
 
         <div>
-          <p>Created By {`${instructor.firstName}`}</p>
+          <p>Created By {`${instructor?.firstName}`}</p>
         </div>
 
         <div className="flex gap-x-3">
@@ -129,7 +129,7 @@ const CourseDetails = () => {
 
         <div>
           <CourseDetailsCard
-            course={courseData.data[0]}
+            course={courseData}
             setConfirmationModal={setConfirmationModal}
             handleBuyCourse={handleBuyCourse}
           />
@@ -148,10 +148,10 @@ const CourseDetails = () => {
 
         <div className="flex gap-x-3 justify-between">
           <div>
-            <span>{courseContent.length} section(s)</span>
+            <span>{courseContent?.length} section(s)</span>
 
             <span>{totalNoOfLectures} lectures</span>
-            <span>{courseData.data.totalDuration} total length</span>
+            <span>{courseData?.data?.totalDuration} total length</span>
           </div>
 
           <div>

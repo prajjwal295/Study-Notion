@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-import http from "http";
 
 const userRoutes = require("./route/User");
 const profileRoutes = require("./route/Profile");
@@ -39,7 +38,7 @@ app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/reach", contactRoutes);
-// app.use("/api/v1/payment", paymentRoutes);
+app.use("/api/v1/payment", paymentRoutes);
 
 // default route
 app.get("/", (req, res) => {

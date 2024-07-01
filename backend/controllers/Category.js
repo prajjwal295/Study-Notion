@@ -66,7 +66,12 @@ exports.categoryPageDetails = async (req, res) => {
     const selectedCategory = await Category.findById({
       _id: categoryId,
     })
-      .populate("course")
+      .populate({
+        path: "course",
+        populate: {
+          path: "instructor",
+        },
+      })
       .exec();
 
     // validation
@@ -111,9 +116,7 @@ exports.categoryPageDetails = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Data found ",
-      categoryPageDetails,
-      // differentCategories,
-      // topSellingCourse,
+      selectedCategory,
     });
   } catch (err) {
     return res.status(404).json({
