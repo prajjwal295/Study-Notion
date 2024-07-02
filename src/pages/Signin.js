@@ -20,15 +20,7 @@ const Signin = () => {
     confirmPassword: "",
   });
 
-  const {
-    firstName,
-    lastName,
-    email,
-    password,
-    confirmPassword,
-  } = user;
-
-  console.log({ user });
+  const { firstName, lastName, email, password, confirmPassword } = user;
 
   const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT);
   const [showPassword, setShowPassword] = useState(false);
@@ -81,7 +73,7 @@ const Signin = () => {
               </span>
             </p>
 
-            <div className="flex gap-2 mx-start bg-richblack-800 rounded-lg lg:w-[250px] border-b-richblack-500 border-b-[1px] rounded-l-full rounded-r-full">
+            <div className="flex  mx-start bg-richblack-800 rounded-lg lg:w-[250px] border-b-richblack-500 border-b-[1px] rounded-l-full rounded-r-full max-md:w-[50%]">
               {tabData.map((element) => (
                 <div
                   key={element?.id}
@@ -89,18 +81,18 @@ const Signin = () => {
                     setAccountType(element.type);
                     setUser({
                       ...user,
-                      firstName:"",
-                      lastName:"",
-                      email:"",
-                      password:"",
-                      confirmPassword:"",
+                      firstName: "",
+                      lastName: "",
+                      email: "",
+                      password: "",
+                      confirmPassword: "",
                     });
                   }}
-                  className={`m-1 rounded-lg rounded-l-full rounded-r-full text-lg  p-2 px-5  ${
+                  className={`flex m-1 w-full rounded-lg rounded-l-full rounded-r-full text-lg  p-2   ${
                     element?.type === accountType ? "bg-richblack-900" : ""
                   }`}
                 >
-                  {element?.name}
+                  <p className="mx-auto"> {element?.name}</p>
                 </div>
               ))}
             </div>
@@ -109,8 +101,8 @@ const Signin = () => {
               onSubmit={handleOnSubmit}
               className="flex flex-col  my-6 gap-3 "
             >
-              <div className="flex gap-5">
-                <div className=" flex flex-col gap-2 relative">
+              <div className="flex gap-5 max-md:flex-col">
+                <div className="flex flex-col gap-2 relative">
                   <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
                     First Name <sup className="text-pink-200">*</sup>
                   </p>
@@ -153,7 +145,7 @@ const Signin = () => {
                   }}
                 />
               </div>
-              <div className="flex gap-5">
+              <div className="flex gap-5 max-md:flex-col">
                 <div className=" flex flex-col gap-2 relative">
                   <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
                     Password <sup className="text-pink-200">*</sup>
@@ -201,7 +193,7 @@ const Signin = () => {
               </button>
             </form>
           </div>
-          <div className="relative border-2 shadow-[12px_12px_0_0] shadow-richblack-5 w-11/12 max-w-[450px] max-h-[420px]">
+          <div className="max-md:hidden relative border-2 shadow-[12px_12px_0_0] shadow-richblack-5 w-11/12 max-w-[450px] max-h-[420px]">
             <img src={signup} className="h-full"></img>
           </div>
         </div>

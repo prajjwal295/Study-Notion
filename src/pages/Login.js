@@ -83,7 +83,7 @@ const Login = () => {
               </button>
             </form>
           </div>
-          <div className="relative border-2 shadow-[12px_12px_0_0] shadow-richblack-5 w-11/12 max-w-[450px]">
+          <div className="max-md:hidden relative border-2 shadow-[12px_12px_0_0] shadow-richblack-5 w-11/12 max-w-[450px]">
             <img src={loginpic} className="h-full"></img>
           </div>
         </div>

@@ -10,8 +10,10 @@ import InstructorPage from "../components/core/HomePage/InstructorPage";
 import ExploreMore from "../components/core/HomePage/ExploreMore";
 import Footer from "../components/common/Footer";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const { token } = useSelector((store) => store.auth);
   return (
     <div className="">
       {/* {section1} */}
@@ -25,7 +27,7 @@ const Home = () => {
           </div>
         </Link>
 
-        <div className="flex mx-auto font-semibold text-3xl mt-4">
+        <div className="text-center text-4xl font-semibold mt-7">
           <div className="pr-2">Empower Your Future with</div>
           <div className="text-richblue-100">Coding Skills</div>
         </div>
@@ -38,12 +40,25 @@ const Home = () => {
         </div>
 
         <div className="flex flex-row gap-7 mt-8">
-          <CTAbutton active={true} linkTo={"/signup"}>
-            Learn Something New
-          </CTAbutton>
-          <CTAbutton active={false} linkTo={"/login"}>
-            Book Demo
-          </CTAbutton>
+          {token ? (
+            <>
+              <CTAbutton active={true} linkTo={"/dashboard/my-courses"}>
+                Go to Dashboard
+              </CTAbutton>
+              <CTAbutton active={false} linkTo={"/dashboard/my-courses"}>
+                Your Courses
+              </CTAbutton>
+            </>
+          ) : (
+            <>
+              <CTAbutton active={true} linkTo={"/signup"}>
+                Learn Something New
+              </CTAbutton>
+              <CTAbutton active={false} linkTo={"/login"}>
+                Book Demo
+              </CTAbutton>
+            </>
+          )}
         </div>
 
         <div className="mx-4 my-12 w-[70%] shadow-blue-200">
@@ -109,27 +124,27 @@ const Home = () => {
             backgroundGradient={<div className="codeblock1 absolute"></div>}
           ></CodeBlock>
         </div>
-        <ExploreMore />
+        {/* <ExploreMore /> */}
       </div>
 
       {/* {section2} */}
 
       <div className="text-richblack-700 bg-[#f9f9f9] ">
-        <div className="homepage-bg h-[300px]">
-          <div className="flex flex-col  w-11/12 items-center mx-auto max-w-maxContent justify-between">
-            <div className="flex flex-row gap-7 mt-8 text-white pt-[180px]">
-              <CTAbutton active={true} linkTo={"/signup"}>
+        {/* <div className="homepage-bg h-[200px]">
+          <div className="flex w-11/12 items-center mx-auto max-w-maxContent justify-between">
+            <div className="flex flex-row gap-7  text-white pt-[180px]">
+              <CTAbutton active={true} linkTo={"/catalog/"}>
                 <div className="flex flex-row gap-2 items-center">
                   Explore Full Catelog
                   <FaArrowRight />
                 </div>
               </CTAbutton>
-              <CTAbutton active={false} linkTo={"/login"}>
+              <CTAbutton active={false} linkTo={"/learnMore"}>
                 Learn More
               </CTAbutton>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between h-full gap-20 pb-10">
           <div className="flex justify-between mt-20">
@@ -145,7 +160,7 @@ const Home = () => {
                 be a competitive specialist requires more than professional
                 skills.
               </div>
-              <CTAbutton active={true} linkTo={"./login"}>
+              <CTAbutton active={true} linkTo={"/learnMore"}>
                 Learn More
               </CTAbutton>
             </div>
@@ -157,7 +172,7 @@ const Home = () => {
 
       {/* {section3} */}
 
-      <div className="relative mx-auto flex flex-col w-11/12 items-center max-w-maxContent text-white justify-between">
+      <div className="relative mx-auto flex flex-col w-11/12 items-center max-w-maxContent text-white justify-between mb-10">
         <InstructorPage />
       </div>
 

@@ -105,7 +105,7 @@ export default function SmallScreenNavbar({ handleCrossButton, isClose ,setIsClo
             </Link>
           )}
           {token === null && (
-            <Link to="/signup">
+            <Link to="/signin">
               <button
                 className="rounded-[8px] border border-richblack-700 bg-richblack-800
               z-[1000] px-[6px] py-[4px] text-richblack-100"
