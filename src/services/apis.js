@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:4000/api/v1";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export const categories = {
   CATEGORIES_API: `${BASE_URL}/course/showAllCategories`,
@@ -13,16 +13,14 @@ export const endpoints = {
   RESETPASSWORD_API: BASE_URL + "/auth/reset-password",
 };
 
-
 export const contactusEndpoint = {
   CONTACT_US_API: BASE_URL + "/reach/contact",
 };
 
 export const settingsEndpoints = {
-  UPDATE_DISPLAY_PICTURE_API:
-    "http://localhost:4000/api/v1/profile/updateDisplayPicture",
-  UPDATE_PROFILE_API: "http://localhost:4000/api/v1/profile/updateProfile",
-  DELETE_PROFILE_API: "http://localhost:4000/api/v1/profile/deleteProfile",
+  UPDATE_DISPLAY_PICTURE_API: BASE_URL + "/profile/updateDisplayPicture",
+  UPDATE_PROFILE_API: BASE_URL + "/profile/updateProfile",
+  DELETE_PROFILE_API: BASE_URL + "/profile/deleteProfile",
 };
 
 export const profileEndpoints = {
