@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 import IconBtn from "../../../common/IconBtn";
 import { useEffect, useState } from "react";
-import { buyCourse } from "../../../../services/operations/Payment";
+import {
+  buyCourse,
+  enrollCourse,
+} from "../../../../services/operations/Payment";
 
 export default function RenderTotalAmount() {
   const { total, cart } = useSelector((state) => state.cart);
@@ -12,11 +15,10 @@ export default function RenderTotalAmount() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
-    const handleBuyCourse = () => {
-      const courses = cart.map((course) => course._id);
-      buyCourse(token, courses, user, navigate, dispatch);
-    };
+  const handleBuyCourse = () => {
+    const courses = cart.map((course) => course._id);
+    enrollCourse(token, courses, user, navigate, dispatch);
+  };
 
   return (
     <div className="min-w-[280px] rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6">

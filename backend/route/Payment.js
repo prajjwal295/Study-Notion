@@ -6,13 +6,11 @@ const {
   capturePayment,
   verifyPayment,
   sendPaymentSuccessEmail,
+  enrollStudents,
 } = require("../controllers/Payments");
-const {
-  auth,
-  isInstructor,
-  isStudent,
-  isAdmin,
-} = require("../middleware/auth");
+
+const { auth, isStudent } = require("../middleware/auth");
+
 router.post("/capturePayment", auth, isStudent, capturePayment);
 router.post("/verifyPayment", auth, isStudent, verifyPayment);
 router.post(
@@ -21,5 +19,6 @@ router.post(
   isStudent,
   sendPaymentSuccessEmail
 );
+router.post("/EnrollStudent", auth, isStudent, enrollStudents);
 
 module.exports = router;

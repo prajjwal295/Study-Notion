@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-// import { buyCourse } from "../services/operations/studentFeaturesAPI";
+import { buyCourse } from "../services/operations/Payment";
 import { getFullDetailsOfCourse } from "../services/operations/CourseApi";
 import { setCourse } from "../utils/courseSlice";
 // import GetAvgRating from "../utils/avgRating";
@@ -71,9 +71,10 @@ const CourseDetails = () => {
 
   const handleBuyCourse = () => {
     if (token) {
-    //   buyCourse(token, [courseId], user, navigate, dispatch);
+      buyCourse(token, [courseId], user, navigate, dispatch);
       return;
     }
+    
     setConfirmationModal({
       text1: "you are not Logged in",
       text2: "Please login to purchase the course",
@@ -108,9 +109,9 @@ const CourseDetails = () => {
 
   return (
     <div className="flex flex-col  text-white">
-      <div className="relative flex flex-col justify-start p-8">
-        <p>{courseName}</p>
-        <p>{courseDescription}</p>
+      <div className="relative flex flex-col justify-start p-8 ">
+        <p className="text-lg font-semibold ">{courseName}</p>
+        <p className="text-sm" >{courseDescription}</p>
         <div className="flex gap-x-2">
           <span>{avgReviewCount}</span>
           {/* <RatingStars Review_Count={avgReviewCount} Star_Size={24} /> */}

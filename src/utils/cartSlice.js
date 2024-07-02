@@ -43,13 +43,17 @@ const cartSlice = createSlice({
     },
 
     resetCart(state, action) {
-      state.course = [];
-      state.totalItems = 0;
+      state.cart = [];
       state.total = 0;
+      state.totalItems = 0;
+
+      localStorage.removeItem("cart");
+      localStorage.removeItem("total");
+      localStorage.removeItem("totalItems");
     },
   },
 });
 
-export const { addToCart, removeFromCart ,resetCart} = cartSlice.actions;
+export const { addToCart, removeFromCart, resetCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

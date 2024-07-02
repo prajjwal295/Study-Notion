@@ -37,8 +37,10 @@ exports.showAllCategorys = async (req, res) => {
   try {
     const allCategory = await Category.find(
       {},
-      { name: true, description: true }
-    );
+      { name: true, description: true, course: true }
+    )
+      .populate("course")
+      .exec();
 
     return res.status(200).json({
       success: true,

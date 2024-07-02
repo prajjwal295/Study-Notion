@@ -163,6 +163,7 @@ function Navbar() {
             isClose={isClose}
             setIsClose={setIsClose}
             handleCrossButton={handleCrossButton}
+            subLinks={subLinks}
           />
         )}
       </div>

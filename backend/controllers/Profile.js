@@ -1,8 +1,10 @@
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 const Course = require("../models/Course");
+const CourseProgress = require("../models/CourseProgress")
 const jwt = require("jsonwebtoken");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const { convertSecondsToDuration } = require("../utils/secToDuration");
 
 exports.updateProfile = async (req, res) => {
   try {
@@ -158,7 +160,7 @@ exports.getAllUserDetails = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.id;
 
-    console.log({ userId });
+    // console.log({ userId });
 
     const userDetails = await User.findById(userId).populate(
       "additionalDetails"
@@ -202,7 +204,7 @@ exports.getEnrolledCourses = async (req, res) => {
       })
       .exec();
     userDetails = userDetails.toObject();
-    console.log(userDetails)
+    // console.log(userDetails)
     var SubsectionLength = 0;
     for (var i = 0; i < userDetails.courses.length; i++) {
       let totalDurationInSeconds = 0;

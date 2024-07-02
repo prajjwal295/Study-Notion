@@ -9,6 +9,7 @@ const {
   COURSE_PAYMENT_API,
   COURSE_VERIFY_API,
   SEND_PAYMENT_SUCCESS_EMAIL_API,
+  COURSE_ENROLLMENT_API,
 } = studentEndpoints;
 
 function loadScript(src) {
@@ -93,6 +94,64 @@ export async function buyCourse(
   } catch (error) {
     console.log("PAYMENT API ERROR.....", error);
     toast.error("Could not make Payment");
+  }
+  toast.dismiss(toastId);
+}
+
+export async function enrollCourse(
+  token,
+  courses,
+  userDetails,
+  navigate,
+  dispatch
+) {
+  const toastId = toast.loading("Loading...");
+  try {
+    //initiate the order(capture payment)
+    const data = await apiConnector(
+      "POST",
+      COURSE_ENROLLMENT_API,
+      { courses },
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+
+    if (!data.data.success) {
+      throw new Error(data.data.message);
+    }
+
+    //  const options = {
+    //    key: process.env.RAZORPAY_KEY,
+    //   //  currency: orderResponse.data.message.currency,
+    //   //  amount: `${orderResponse.data.message.amount}`,
+    //   //  order_id: orderResponse.data.message.id,
+    //    name: "StudyNotion",
+    //    description: "Thank You for Purchasing the Course",
+    //    image: rzpLogo,
+    //    prefill: {
+    //      name: `${userDetails.firstName}`,
+    //      email: userDetails.email,
+    //    },
+    //    handler: function (response) {
+    //      //send successful wala mail
+    //      sendPaymentSuccessEmail(
+    //        response,
+    //        orderResponse.data.message.amount,
+    //        token
+    //      );
+    //      //verifyPayment
+    //      verifyPayment({ ...response, courses }, token, navigate, dispatch);
+    //    },
+    //  };
+    console.log("PRINTING data", data);
+    toast.success("payment Successful, ypou are addded to the course");
+    navigate("/dashboard/enrolled-courses");
+    dispatch(resetCart());
+    //options
+  } catch (error) {
+    console.log("PAYMENT API ERROR.....", error);
+    toast.error(error.response.data.message);
   }
   toast.dismiss(toastId);
 }

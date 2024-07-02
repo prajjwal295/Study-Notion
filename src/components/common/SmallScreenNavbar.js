@@ -17,7 +17,12 @@ import ConfirmationModal from "./ConfirmationModal";
 import ProfileDropdown from "./ProfileDropdown";
 
 // import {ImCross} from "react-icons/im"
-export default function SmallScreenNavbar({ handleCrossButton, isClose ,setIsClose}) {
+export default function SmallScreenNavbar({
+  handleCrossButton,
+  isClose,
+  setIsClose,
+  subLinks,
+}) {
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
   const { totalItems } = useSelector((state) => state.cart);
@@ -25,7 +30,7 @@ export default function SmallScreenNavbar({ handleCrossButton, isClose ,setIsClo
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [subLinks, setSubLinks] = useState([]);
+  // const [subLinks, setSubLinks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [confirmationModal, setConfirmationModal] = useState(null);
 
@@ -34,30 +39,17 @@ export default function SmallScreenNavbar({ handleCrossButton, isClose ,setIsClo
   // const [smallScreen, setSmallScreen] = useState(false);
   // const [isClose, setIsClose] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      setLoading(true);
-      try {
-        const res = await apiConnector("GET", categories.CATEGORIES_API);
-        setSubLinks(res.data.data);
-      } catch (error) {
-        console.log("Could not fetch Categories.", error);
-      }
-      setLoading(false);
-    })();
-  }, []);
-
-  // console.log("sub links", subLinks)
+  console.log("sub links", subLinks);
 
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname);
   };
 
-//   const handleCrossButton = () => {
-//     isClose = isClose ? setIsClose(false) : setIsClose(true);
-//     // smallScreen = smallScreen ? setSmallScreen(false) : setSmallScreen(true);
-//   }
-//   const Icon = Icons[iconName]
+  //   const handleCrossButton = () => {
+  //     isClose = isClose ? setIsClose(false) : setIsClose(true);
+  //     // smallScreen = smallScreen ? setSmallScreen(false) : setSmallScreen(true);
+  //   }
+  //   const Icon = Icons[iconName]
 
   return (
     <div

@@ -11,6 +11,9 @@ const { default: mongoose } = require("mongoose");
 // } = require("../mail/templates/paymentSuccessEmail");
 const crypto = require("crypto");
 const CourseProgress = require("../models/CourseProgress");
+const {
+  courseEnrollmentEmail,
+} = require("../mail/templates/courseEnrollmentEmail");
 
 //initiate the razorpay order
 exports.capturePayment = async (req, res) => {
@@ -100,20 +103,35 @@ exports.verifyPayment = async (req, res) => {
   return res.status(200).json({ success: "false", message: "Payment Failed" });
 };
 
-const enrollStudents = async (courses, userId, res) => {
-  if (!courses || !userId) {
-    return res.status(400).json({
-      success: false,
-      message: "Please Provide data for Courses or UserId",
-    });
-  }
+exports.enrollStudents = async (req, res) => {
+  try {
+    const { courses } = req.body;
+    const userId = req.user.id;
+    if (!courses || !userId) {
+      return res.status(400).json({
+        success: false,
+        message: "Please Provide data for Courses or UserId",
+      });
+    }
 
-  for (const courseId of courses) {
-    try {
-      //find the course and enroll the student in it
+    for (const courseId of courses) {
+      const course = await Course.findById({ _id: courseId });
+      if (!course) {
+        return res
+          .status(200)
+          .json({ success: false, message: "Could not find the course" });
+      }
+
+      const uid = new mongoose.Types.ObjectId(userId);
+      if (course.studentEnrolled.includes(uid)) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Student is already Enrolled" });
+      }
+
       const enrolledCourse = await Course.findOneAndUpdate(
         { _id: courseId },
-        { $push: { studentsEnrolled: userId } },
+        { $push: { studentEnrolled: userId } },
         { new: true }
       );
 
@@ -142,7 +160,7 @@ const enrollStudents = async (courses, userId, res) => {
 
       ///bachhe ko mail send kardo
       const emailResponse = await mailSender(
-        enrollStudents.email,
+        enrolledStudent.email,
         `Successfully Enrolled into ${enrolledCourse.courseName}`,
         courseEnrollmentEmail(
           enrolledCourse.courseName,
@@ -150,10 +168,13 @@ const enrollStudents = async (courses, userId, res) => {
         )
       );
       //console.log("Email Sent Successfully", emailResponse.response);
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ success: false, message: error.message });
     }
+    return res
+      .status(200)
+      .json({ success: true, message: "Student Enrolled Successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 

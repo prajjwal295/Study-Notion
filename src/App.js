@@ -22,7 +22,8 @@ import EditCourse from "./components/core/Dashboard/EditCourse";
 import Instructor from "./components/core/Dashboard/InstructorDashboard/Instructor";
 import Catalog from "./pages/Catelog";
 import CourseDetails from "./pages/CourseDetails";
-
+import Cat from "./pages/Cat";
+import ViewCourse from "./pages/ViewCourse";
 
 const App = () => {
   const { user } = useSelector((store) => store.profile);
@@ -39,11 +40,8 @@ const App = () => {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="catalog/:catalogName" element={<Catalog />} />
+        <Route path="cat" element={<Cat />} />
         <Route path="courses/:courseId" element={<CourseDetails />} />
-        {/* <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="my-profile" element={<Profile />} />
-          <Route path="enrolled-courses" element={<EnrolledCourses />} />
-        </Route> */}
 
         <Route
           element={
@@ -54,6 +52,7 @@ const App = () => {
         >
           <Route path="dashboard/my-profile" element={<Profile />} />
           <Route path="dashboard/Settings" element={<Settings />} />
+
           {user !== null && user.accountType === ACCOUNT_TYPE.STUDENT && (
             <Route path="dashboard/cart" element={<Cart />} />
           )}
@@ -61,6 +60,12 @@ const App = () => {
             <Route
               path="dashboard/enrolled-courses"
               element={<EnrolledCourses />}
+            />
+          )}
+          {user !== null && user.accountType === ACCOUNT_TYPE.STUDENT && (
+            <Route
+              path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
+              element={<ViewCourse />}
             />
           )}
           {user !== null && user.accountType === ACCOUNT_TYPE.INSTRUCTOR && (

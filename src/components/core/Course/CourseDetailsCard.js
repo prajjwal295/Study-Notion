@@ -65,20 +65,20 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
             Rs. {CurrentPrice}
           </div>
           <div className="flex flex-col gap-4">
-            <IconBtn
-              className="yellowButton "
+            <button
+              className="blackButton"
               onClick={
-                user && course?.studentsEnrolled?.includes(user?._id)
+                user && course?.studentEnrolled?.includes(user?._id)
                   ? () => navigate("/dashboard/enrolled-courses")
                   : handleBuyCourse
               }
             >
-              {user && course?.studentsEnrolled?.includes(user?._id)
+              {user && course?.studentEnrolled?.includes(user?._id)
                 ? "Go To Course"
                 : "Buy Now"}
-            </IconBtn>
+            </button>
             {!user ||
-              (!course?.studentsEnrolled?.includes(user?._id) && (
+              (!course?.studentEnrolled?.includes(user?._id) && (
                 <button onClick={handleAddToCart} className="blackButton">
                   Add to Cart
                 </button>
