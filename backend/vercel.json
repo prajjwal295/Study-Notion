@@ -5,7 +5,9 @@
         {
             "src": "index.js",
             "use": "@vercel/node",
-            "framework":null
+            "config": {
+                "buildCommand": "node build"
+            }
         }
     ],
     "routes": [
