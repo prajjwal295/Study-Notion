@@ -5,7 +5,7 @@
         {
             "src": "index.js",
             "use": "@vercel/node",
-            "framework":"@vercel/node"
+            "framework":null
         }
     ],
     "routes": [
