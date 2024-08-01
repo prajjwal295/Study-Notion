@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# Study Notion
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Study Notion is a comprehensive learning management system (LMS) built using the MERN stack (MongoDB, Express.js, React, Node.js). It offers a platform for instructors to create and manage courses, deliver content, and interact with students, while allowing students to access course materials and track their progress.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- User Authentication (Sign Up, Log In, Log Out)
+- Course Management (Create, Update, Delete Courses)
+- Content Delivery (Videos, Documents, Quizzes)
+- User Interaction (Discussions, Forums)
+- Progress Tracking (Track Student Progress)
 
-### `npm start`
+- Technologies Used:
+  - React
+  - Redux Toolkit
+  - RTK Query
+  - Node.js
+  - MongoDB
+  - Cloudinary
+  - Tailwind CSS
+  - LocalStorage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## How I Made It
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **State Management:** Utilized Redux Toolkit for state management, ensuring a predictable and efficient state handling mechanism. LocalStorage is employed for auto-login and persistent behavior.
 
-### `npm test`
+- **Data Fetching:** Implemented Axios for better Data fetching
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Styling:** Achieved perfect styling using Tailwind CSS, enabling rapid development and consistent design.
 
-### `npm run build`
+- **User-Based System:** Integrated MongoDB and Redux Toolkit to facilitate user-based interactions such as follow/unfollow. Cloudinary is utilized for photo uploading in posts and profiles.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Setup Guide
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To get started with Stack Spot, follow these steps:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository:
 
-### `npm run eject`
+   ```bash
+   git clone https://github.com/your-username/Study-Notion.git
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Install the dependencies:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```bash
+   cd Study-Notion
+   npm install
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Configure the environment variables:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   - Create a `.env` file in the root directory
+   - Add the necessary environment variables (e.g., MongoDB connection string, Cloudinary credentials)
 
-## Learn More
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contributing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Contributions are welcome! If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
 
-### Code Splitting
+## Developed By
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+👤 Prajjwal Mishra
 
-### Analyzing the Bundle Size
+- Email : mishraprajjwal295@gmail.com
+- Twitter : [Prajjwal Mishra](https://twitter.com/Prajjwal295)
+- LinkedIn : [Prajjwal Mishra](https://www.linkedin.com/in/prajjwal295)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Keep Coding! 🚀
