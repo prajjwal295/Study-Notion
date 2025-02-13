@@ -1,4 +1,7 @@
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+import UpdatePassword from "../pages/UpdatePassword";
+
+//const BASE_URL = process.env.REACT_APP_BASE_URL;
+const BASE_URL = 'http://localhost:4000/api/v1'
 
 export const categories = {
   CATEGORIES_API: `${BASE_URL}/course/showAllCategories`,
@@ -11,6 +14,7 @@ export const endpoints = {
   LOGIN_API: BASE_URL + "/auth/login",
   RESETPASSTOKEN_API: BASE_URL + "/auth/reset-password-token",
   RESETPASSWORD_API: BASE_URL + "/auth/reset-password",
+  CHANGEPASSWORD_API : BASE_URL + "auth/changepassword"
 };
 
 export const contactusEndpoint = {

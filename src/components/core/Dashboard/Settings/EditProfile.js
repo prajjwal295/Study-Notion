@@ -31,7 +31,7 @@ export default function EditProfile() {
     <>
       <form onSubmit={handleSubmit(submitProfileForm)}>
         {/* Profile Information */}
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
+        <div className="my-10 flex flex-col gap-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
           <h2 className="text-lg font-semibold text-richblack-5">
             Profile Information
           </h2>
@@ -85,7 +85,7 @@ export default function EditProfile() {
                 type="date"
                 name="dob"
                 id="dateOfBirth"
-                className="form-style bg-richblack-300 p-2 rounded-md"
+                className="form-style bg-richblack-300 p-2 rounded-md cursor-pointer"
                 {...register("dob", {
                   required: {
                     value: true,
@@ -112,7 +112,7 @@ export default function EditProfile() {
                 type="text"
                 name="gender"
                 id="gender"
-                className="form-style bg-richblack-300 p-2 rounded-md"
+                className="form-style bg-richblack-300 p-2 rounded-md cursor-pointer"
                 {...register("gender", { required: true })}
                 defaultValue={user?.additionalDetails?.gender}
               >
@@ -179,9 +179,8 @@ export default function EditProfile() {
               )}
             </div>
           </div>
-        </div>
 
-        <div className="flex justify-end gap-2">
+          <div className="flex justify-end gap-2">
           <button
             onClick={() => {
               navigate("/dashboard/my-profile");
@@ -190,7 +189,8 @@ export default function EditProfile() {
           >
             Cancel
           </button>
-          <IconBtn type="submit" text="Save" />
+          <IconBtn type="submit" text="Save" onclick={handleSubmit} />
+        </div>
         </div>
       </form>
     </>

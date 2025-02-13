@@ -154,6 +154,7 @@ exports.deleteAccount = async (req, res) => {
   }
 };
 
+
 exports.getAllUserDetails = async (req, res) => {
   try {
     const token = req.cookies.token;

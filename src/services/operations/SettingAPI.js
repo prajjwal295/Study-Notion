@@ -52,7 +52,7 @@ export function updateProfile(token, formData) {
         throw new Error(response.data.message);
       }
       const userImage = response.data.userData.image
-        ? response.data.updatedUserDetails.image
+        ? response.data.userData.image
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.updatedUserDetails.firstName} ${response.data.updatedUserDetails.lastName}`;
       dispatch(
         setUser({ ...response.data.userData, image: userImage })

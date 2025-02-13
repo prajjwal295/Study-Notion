@@ -176,9 +176,42 @@ export function login(email, password, navigate) {
       navigate("/dashboard/my-profile");
     } catch (error) {
       console.log("LOGIN API ERROR............", error);
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message || error?.message);
     }
 
     toast.dismiss(toastId);
+  };
+}
+
+export function changePassword(email, oldPassword, newPassword, token) {
+  return async () => {
+    const toastId = toast.loading("Loading...");
+    let response;
+    try {
+      response = await apiConnector("POST", "", {
+        email,
+        oldPassword,
+        newPassword,
+        token
+      });
+
+      console.log("SEND OTP API Response.....", response);
+
+      if (response && response.data && !response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      toast.success("Password Changed Successfully");
+
+      return true; 
+
+    } catch (e) {
+      console.log("Change Password ERROR............", e);
+      toast.error("Change Password Failed");
+
+      return false;
+    } finally {
+      toast.dismiss(toastId); 
+    }
   };
 }

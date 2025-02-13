@@ -45,11 +45,6 @@ export default function Upload({
     reader.onloadend = () => {
       setPreviewSource(reader.result);
     };
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewSource(reader.result);
-    };
   };
 
   useEffect(() => {

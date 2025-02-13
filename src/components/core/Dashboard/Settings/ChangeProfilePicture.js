@@ -8,14 +8,13 @@ import { updateDisplayPicture } from "../../../../services/operations/SettingAPI
 
 const ChangeProfilePicture = () => {
   const { token } = useSelector((store) => store.auth);
-
   const {user} = useSelector((store) => store.profile);
 
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-
   const [image, setImage] = useState(null);
   const [previewSource, setPreviewSource] = useState(null);
+  const [error,setError] = useState(null);
 
   const fileInputRef = useRef(null);
 
@@ -25,6 +24,7 @@ const ChangeProfilePicture = () => {
     if (file) {
       setImage(file);
       previewFile(file);
+      setError(null);
     }
   };
 
@@ -42,6 +42,11 @@ const ChangeProfilePicture = () => {
 
   const handleFileUpload = () => {
     try {
+      if(!image)
+      {
+        setError("Please Select a Image")
+        return;
+      }
       console.log("uploading...");
       setLoading(true);
       const formData = new FormData();
@@ -70,7 +75,7 @@ const ChangeProfilePicture = () => {
           className="aspect-square w-[78px] rounded-full object-cover"
         />
         <div className="flex flex-col gap-2">
-          <p>Change Profile Picture</p>
+          <p className="font-bold">Change Profile Picture</p>
           <div className="flex flex-row gap-3">
             <input
               type="file"
@@ -93,6 +98,9 @@ const ChangeProfilePicture = () => {
               {!loading && <FiUpload className="text-lg text-richblack-900" />}
             </IconBtn>
           </div>
+          {error && <span className="mt-1 text-[12px] text-yellow-100">
+                  {error}
+                </span>}
         </div>
       </div>
     </div>
