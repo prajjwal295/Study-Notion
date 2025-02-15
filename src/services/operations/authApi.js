@@ -1,15 +1,15 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiconnector";
-import { categories, endpoints } from "../apis";
+import { categories,endpoints } from "../apis";
 import { setToken, setSignupData } from "../../utils/authSlice";
 import { setUser } from "../../utils/profileSlice";
-
 const {
-  LOGIN_API,
-  SENDOTP_API,
-  RESETPASSTOKEN_API,
-  RESETPASSWORD_API,
-  SIGNUP_API,
+  LOGIN_API ,
+  SENDOTP_API ,
+  RESETPASSTOKEN_API ,
+  RESETPASSWORD_API ,
+  SIGNUP_API ,
+  CHANGEPASSWORD_API,
 } = endpoints;
 
 export function sendOtp(email, navigate) {
@@ -183,19 +183,18 @@ export function login(email, password, navigate) {
   };
 }
 
-export function changePassword(email, oldPassword, newPassword, token) {
-  return async () => {
+export async function changePassword(email, oldPassword, newPassword, token) {
     const toastId = toast.loading("Loading...");
     let response;
     try {
-      response = await apiConnector("POST", "", {
+      response = await apiConnector("POST", CHANGEPASSWORD_API, {
         email,
         oldPassword,
         newPassword,
         token
       });
 
-      console.log("SEND OTP API Response.....", response);
+      console.log("Password change Response.....", response);
 
       if (response && response.data && !response.data.success) {
         throw new Error(response.data.message);
@@ -213,5 +212,4 @@ export function changePassword(email, oldPassword, newPassword, token) {
     } finally {
       toast.dismiss(toastId); 
     }
-  };
 }

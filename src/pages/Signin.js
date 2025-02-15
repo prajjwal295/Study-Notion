@@ -20,15 +20,15 @@ const Signin = () => {
     confirmPassword: "",
   });
 
-  const { firstName, lastName, email, password, confirmPassword } = user;
-
   const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
-    if (user.pass != user.confirmPass) {
+    console.log(user)
+
+    if (user.password != user.confirmPassword) {
       toast.error("Password Do not Match");
       return;
     }
@@ -37,6 +37,7 @@ const Signin = () => {
       ...user,
       accountType,
     };
+
 
     dispatch(setSignupData(signupData));
     dispatch(sendOtp(user.email, navigate));

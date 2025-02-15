@@ -227,7 +227,7 @@ exports.login = async (req, res) => {
 
     // user existence check
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate("additionalDetails").exec();
 
     if (!user) {
       return res.status(403).json({
@@ -288,8 +288,7 @@ exports.changePassword = async (req, res) => {
   try {
     // get data from req body
 
-    const { email, password, NewPassword } = req.body;
-
+    const { email, oldPassword, newPassword } = req.body;
     const user = await User.findOne({ email: email });
 
     if (!user) {
@@ -299,16 +298,23 @@ exports.changePassword = async (req, res) => {
       });
     }
 
-    // get oldpassword , newPassword , confirmPassword
-    // validation
-    if (await bcrypt.compare(password, user.password)) {
-      const hashedPassword = await bcrypt.hash(NewPassword, 10);
+    if (await bcrypt.compare(oldPassword, user.password)) {
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-      //   update in db
       user.password = hashedPassword;
       await user.save();
     }
 
-    // send mail
-  } catch (err) {}
+    return res.status(200).json({
+      success: true,
+      message: "Password Updated",
+    });
+
+  } catch (err) {
+    console.log(err)
+    return res.status(400).json({
+      success: false,
+      message: "Password Updation Failed",
+    });
+  }
 };

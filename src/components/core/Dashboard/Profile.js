@@ -4,28 +4,35 @@ import { useNavigate } from "react-router-dom";
 
 // import { formattedDate } from "../../../utils/dateFormatter";
 import IconBtn from "../../common/IconBtn";
+import { useEffect, useState } from "react";
 
 export default function Profile() {
   const { user } = useSelector((state) => state.profile);
   const navigate = useNavigate();
 
+  const [userData, setUserData] = useState(user);
+
+  useEffect(() => {
+    setUserData(user);
+  }, [user]);
+
   return (
     <>
-      <h1 className="mb-14 text-3xl font-medium text-richblack-5">
+      <h1 className="mb-10 text-3xl font-medium text-richblack-5">
         My Profile
       </h1>
-      <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
-        <div className="flex items-center gap-x-4">
+      <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 md:px-12 ">
+        <div className="flex items-center gap-x-4 flex-col md:flex-row ">
           <img
-            src={user?.image}
-            alt={`profile-${user?.firstName}`}
-            className="aspect-square w-[78px] rounded-full object-cover"
+            src={userData?.image}
+            alt={`profile-${userData?.firstName}`}
+            className="aspect-square max-w-[78px] w-auto rounded-full object-cover"
           />
-          <div className="space-y-1">
+          <div className="space-y-1  mt-2 flex flex-col items-center md:items-start md:mt-0">
             <p className="text-lg font-semibold text-richblack-5">
-              {user?.firstName + " " + user?.lastName}
+              {userData?.firstName + " " + userData?.lastName}
             </p>
-            <p className="text-sm text-richblack-300">{user?.email}</p>
+            <p className="text-sm text-richblack-300">{userData?.email}</p>
           </div>
         </div>
         <IconBtn
@@ -50,13 +57,12 @@ export default function Profile() {
           </IconBtn>
         </div>
         <p
-          className={`${
-            user?.additionalDetails?.about
+          className={`${user?.additionalDetails?.about
               ? "text-richblack-5"
               : "text-richblack-400"
-          } text-sm font-medium`}
+            } text-sm font-medium`}
         >
-          {user?.additionalDetails?.about ?? "Write Something About Yourself"}
+          {userData?.additionalDetails?.about ?? "Write Something About Yourself"}
         </p>
       </div>
       <div className="my-10 flex flex-col gap-y-10 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
@@ -78,19 +84,19 @@ export default function Profile() {
             <div>
               <p className="mb-2 text-sm text-richblack-600">First Name</p>
               <p className="text-sm font-medium text-richblack-5">
-                {user?.firstName}
+                {userData?.firstName}
               </p>
             </div>
             <div>
               <p className="mb-2 text-sm text-richblack-600">Email</p>
               <p className="text-sm font-medium text-richblack-5">
-                {user?.email}
+                {userData?.email}
               </p>
             </div>
             <div>
               <p className="mb-2 text-sm text-richblack-600">Gender</p>
               <p className="text-sm font-medium text-richblack-5">
-                {user?.additionalDetails?.gender ?? "Add Gender"}
+                {userData?.additionalDetails?.gender ? userData?.additionalDetails?.gender : "Add Gender"}
               </p>
             </div>
           </div>
@@ -98,13 +104,13 @@ export default function Profile() {
             <div>
               <p className="mb-2 text-sm text-richblack-600">Last Name</p>
               <p className="text-sm font-medium text-richblack-5">
-                {user?.lastName}
+                {userData?.lastName}
               </p>
             </div>
             <div>
               <p className="mb-2 text-sm text-richblack-600">Phone Number</p>
               <p className="text-sm font-medium text-richblack-5">
-                {user?.additionalDetails?.contactNumber ?? "Add Contact Number"}
+                {userData?.additionalDetails?.contact ? userData?.additionalDetails?.contact : "Add Contact Number"}
               </p>
             </div>
             <div>
@@ -112,6 +118,7 @@ export default function Profile() {
               <p className="text-sm font-medium text-richblack-5">
                 {/* {formattedDate(user?.additionalDetails?.dateOfBirth) ??
                   "Add Date Of Birth"} */}
+                {userData?.additionalDetails?.dob ? userData?.additionalDetails?.dob : "Add Date Of Birth"}
               </p>
             </div>
           </div>

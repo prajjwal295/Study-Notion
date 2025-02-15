@@ -6,7 +6,7 @@ const authSlice = createSlice({
     signupData: null,
     loading: false,
     token: localStorage.getItem("token")
-      ? JSON.parse(localStorage.getItem("token"))
+      ? localStorage.getItem("token")
       : null,
   },
 
@@ -16,6 +16,7 @@ const authSlice = createSlice({
     },
     setToken(state, action) {
       state.token = action.payload;
+      localStorage.setItem("token", state.token);
     },
     setLoading(state, value) {
       state.loading = value.payload;

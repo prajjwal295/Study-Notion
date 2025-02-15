@@ -5,14 +5,14 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: {
     cart: localStorage.getItem("cart")
-      ? JSON.parse(localStorage.getItem("cart"))
+      ? JSON.parse(localStorage.getItem("cart")).cart
       : [],
 
-    total: localStorage.getItem("total")
-      ? JSON.parse(localStorage.getItem("total"))
+    total: localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart")).total
       : 0,
-    totalItems: localStorage.getItem("totalItems")
-      ? JSON.parse(localStorage.getItem("totalItems"))
+    totalItems: localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart")).totalItems
       : 0,
   },
 
@@ -26,9 +26,13 @@ const cartSlice = createSlice({
         return;
       }
 
+      console.log(course.price)
+
       state.cart.push(course);
       state.totalItems++;
       state.total += course.price;
+      localStorage.setItem("cart", JSON.stringify(state));
+      toast.success("Course Added To Cart");
     },
 
     removeFromCart(state, action) {
@@ -36,10 +40,12 @@ const cartSlice = createSlice({
         (item) => item._id === action.payload._id
       );
 
-      state.total -= 11;
+      state.total -= action.payload.price;
       state.totalItems--;
 
       state.cart.pop(data);
+      toast.success("Course Removed From Cart");
+      localStorage.setItem("cart", JSON.stringify(state));
     },
 
     resetCart(state, action) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import copy from "copy-to-clipboard";
 import { toast } from "react-hot-toast";
 import { BsFillCaretRightFill } from "react-icons/bs";
@@ -13,8 +13,11 @@ import IconBtn from "../../common/IconBtn";
 function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
   const { user } = useSelector((state) => state.profile);
   const { token } = useSelector((state) => state.auth);
+  const {cart} = useSelector((state)=>state.cart);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [disabled,setDisabled] = useState(false);
 
   const {
     thumbnail: ThumbnailImage,
@@ -26,6 +29,24 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
     copy(window.location.href);
     toast.success("Link copied to clipboard");
   };
+
+  const checkCart = ()=>{
+    if(ACCOUNT_TYPE.INSTRUCTOR  === user?.accountType)
+    {
+      setDisabled(true);
+    }
+
+    const isCourseInCart = cart.some((c) => c._id === course._id);
+    console.log(isCourseInCart)
+    if (isCourseInCart) {
+      setDisabled(true);
+    }
+    setDisabled(false);
+  }
+
+  useEffect(()=>{
+    checkCart()
+  },[cart]);
 
   const handleAddToCart = () => {
     if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
@@ -45,8 +66,6 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
       btn2Handler: () => setConfirmationModal(null),
     });
   };
-
-  // console.log("Student already enrolled ", course?.studentsEnroled, user?._id)
 
   return (
     <>
@@ -79,7 +98,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
             </button>
             {!user ||
               (!course?.studentEnrolled?.includes(user?._id) && (
-                <button onClick={handleAddToCart} className="blackButton">
+                <button onClick={handleAddToCart} className={disabled ? 'bg-red-200' : 'blackButton'} disabled={disabled}>
                   Add to Cart
                 </button>
               ))}

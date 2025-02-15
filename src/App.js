@@ -24,11 +24,12 @@ import Catalog from "./pages/Catelog";
 import CourseDetails from "./pages/CourseDetails";
 import Cat from "./pages/Cat";
 import ViewCourse from "./pages/ViewCourse";
+import PrivateRoute from "./hooks/PrivateRoute";
 
 const App = () => {
   const { user } = useSelector((store) => store.profile);
   return (
-    <div className="max-w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
+    <div className="max-w-screen min-h-screen bg-richblack-900 flex flex-col font-inter w-full h-full">
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -45,9 +46,9 @@ const App = () => {
 
         <Route
           element={
-            // <PrivateRoute>
+             <PrivateRoute>
             <Dashboard />
-            // {/* </PrivateRoute> */}
+              </PrivateRoute>
           }
         >
           <Route path="dashboard/my-profile" element={<Profile />} />

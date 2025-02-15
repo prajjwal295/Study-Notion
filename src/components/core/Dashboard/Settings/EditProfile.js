@@ -31,7 +31,7 @@ export default function EditProfile() {
     <>
       <form onSubmit={handleSubmit(submitProfileForm)}>
         {/* Profile Information */}
-        <div className="my-10 flex flex-col gap-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
+        <div className="my-10 flex flex-col gap-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 md:px-12">
           <h2 className="text-lg font-semibold text-richblack-5">
             Profile Information
           </h2>
@@ -96,7 +96,7 @@ export default function EditProfile() {
                     message: "Date of Birth cannot be in the future.",
                   },
                 })}
-                defaultValue={user?.additionalDetails?.dateOfBirth}
+                defaultValue={user?.additionalDetails?.dob}
               />
               {errors.dateOfBirth && (
                 <span className="-mt-1 text-[12px] text-yellow-100">
@@ -126,7 +126,7 @@ export default function EditProfile() {
               </select>
               {errors.gender && (
                 <span className="-mt-1 text-[12px] text-yellow-100">
-                  Please enter your Date of Birth.
+                  {errors.gender.message}
                 </span>
               )}
             </div>
@@ -151,7 +151,7 @@ export default function EditProfile() {
                   maxLength: { value: 12, message: "Invalid Contact Number" },
                   minLength: { value: 10, message: "Invalid Contact Number" },
                 })}
-                defaultValue={user?.additionalDetails?.contactNumber}
+                defaultValue={user?.additionalDetails?.contact}
               />
               {errors.contactNumber && (
                 <span className="-mt-1 text-[12px] text-yellow-100">

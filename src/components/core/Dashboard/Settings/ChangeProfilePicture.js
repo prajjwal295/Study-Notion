@@ -47,7 +47,6 @@ const ChangeProfilePicture = () => {
         setError("Please Select a Image")
         return;
       }
-      console.log("uploading...");
       setLoading(true);
       const formData = new FormData();
       formData.append("displayPicture", image);
@@ -67,14 +66,14 @@ const ChangeProfilePicture = () => {
   }, [image]);
 
   return (
-    <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5">
+    <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 md:px-12 text-richblack-5">
       <div className="flex items-center gap-x-4">
         <img
-          src={user?.image}
+          src={previewSource ? previewSource :user?.image}
           alt={`profile-${user?.firstName}`}
           className="aspect-square w-[78px] rounded-full object-cover"
         />
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-4">
           <p className="font-bold">Change Profile Picture</p>
           <div className="flex flex-row gap-3">
             <input
@@ -94,8 +93,9 @@ const ChangeProfilePicture = () => {
             <IconBtn
               text={loading ? "Uploading..." : "Upload"}
               onclick={handleFileUpload}
+              customClasses={"pl-2 "}
             >
-              {!loading && <FiUpload className="text-lg text-richblack-900" />}
+              {!loading && <FiUpload className=" text-richblack-900" />}
             </IconBtn>
           </div>
           {error && <span className="mt-1 text-[12px] text-yellow-100">

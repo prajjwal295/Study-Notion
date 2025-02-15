@@ -43,7 +43,6 @@ const UpdatePassword = () => {
     e.preventDefault();
 
     if (!validateForm()) {
-      setErr(true);
       return;
     }
 
@@ -64,7 +63,7 @@ const UpdatePassword = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className='my-10 flex flex-col gap-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12'>
+      <div className='my-10 flex flex-col gap-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 md:px-12'>
         <div className='flex flex-col gap-5'>
           <h2 className="text-lg font-semibold text-richblack-5">
             Update Password
@@ -75,7 +74,7 @@ const UpdatePassword = () => {
                 Old Password
               </label>
               <input
-                type="password" // It's better to use 'password' type for security
+                type="password" 
                 name="oldPassword"
                 id="oldPassword"
                 placeholder="Enter Older Password"
@@ -100,7 +99,7 @@ const UpdatePassword = () => {
                 New Password
               </label>
               <input
-                type="password" // Also better to use 'password' type here
+                type="password" 
                 name="newPassword"
                 id="newPassword"
                 placeholder="Enter Newer Password"
@@ -132,7 +131,7 @@ const UpdatePassword = () => {
 
         <div className="flex justify-end gap-2">
           <button
-            type="button" // Ensure this doesn't trigger the form submit
+            type="button" 
             onClick={() => {
               navigate("/dashboard/my-profile");
             }}
