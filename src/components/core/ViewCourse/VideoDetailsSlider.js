@@ -6,8 +6,8 @@ import "video-react/dist/video-react.css";
 import { useLocation } from "react-router-dom";
 import { BigPlayButton, Player } from "video-react";
 
-import { markLectureAsComplete } from "../../../services/operations/courseDetailsAPI";
-import { updateCompletedLectures } from "../../../slices/viewCourseSlice";
+// import { markLectureAsComplete } from "../../../services/operations/courseDetailsAPI";
+// import { updateCompletedLectures } from "../../../slices/viewCourseSlice";
 import IconBtn from "../../common/IconBtn";
 
 const VideoDetails = () => {
@@ -157,15 +157,15 @@ const VideoDetails = () => {
   };
 
   const handleLectureCompletion = async () => {
-    setLoading(true);
-    const res = await markLectureAsComplete(
-      { courseId: courseId, subsectionId: subSectionId },
-      token
-    );
-    if (res) {
-      dispatch(updateCompletedLectures(subSectionId));
-    }
-    setLoading(false);
+    // setLoading(true);
+    // const res = await markLectureAsComplete(
+    //   { courseId: courseId, subsectionId: subSectionId },
+    //   token
+    // );
+    // if (res) {
+    //   dispatch(updateCompletedLectures(subSectionId));
+    // }
+    // setLoading(false);
   };
 
   return (
@@ -238,9 +238,10 @@ const VideoDetails = () => {
           )}
         </Player>
       )}
-
+      <div className="lg:flex lg:flex-col hidden">
       <h1 className="mt-4 text-3xl font-semibold">{videoData?.title}</h1>
       <p className="pt-2 pb-6">{videoData?.description}</p>
+      </div>
     </div>
   );
 };

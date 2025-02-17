@@ -37,28 +37,28 @@ export async function buyCourse(
   const toastId = toast.loading("Loading...");
   try {
     //load the script
-    const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
-    );
+    // const res = await loadScript(
+    //   "https://checkout.razorpay.com/v1/checkout.js"
+    // );
 
-    if (!res) {
-      toast.error("RazorPay SDK failed to load");
-      return;
-    }
+    // if (!res) {
+    //   toast.error("RazorPay SDK failed to load");
+    //   return;
+    // }
 
-    //initiate the order(capture payment)
-    const orderResponse = await apiConnector(
-      "POST",
-      COURSE_PAYMENT_API,
-      { courses },
-      {
-        Authorization: `Bearer ${token}`,
-      }
-    );
+    // //initiate the order(capture payment)
+    // const orderResponse = await apiConnector(
+    //   "POST",
+    //   COURSE_PAYMENT_API,
+    //   { courses },
+    //   {
+    //     Authorization: `Bearer ${token}`,
+    //   }
+    // );
 
-    if (!orderResponse.data.success) {
-      throw new Error(orderResponse.data.message);
-    }
+    // if (!orderResponse.data.success) {
+    //   throw new Error(orderResponse.data.message);
+    // }
     console.log("PRINTING orderResponse", orderResponse);
     //options
     const options = {
@@ -144,11 +144,9 @@ export async function enrollCourse(
     //      verifyPayment({ ...response, courses }, token, navigate, dispatch);
     //    },
     //  };
-    console.log("PRINTING data", data);
-    toast.success("payment Successful, ypou are addded to the course");
+    toast.success("Payment Successful, You are addded to the course");
     navigate("/dashboard/enrolled-courses");
     dispatch(resetCart());
-    //options
   } catch (error) {
     console.log("PAYMENT API ERROR.....", error);
     toast.error(error.response.data.message);

@@ -11,6 +11,7 @@ import {
   setEntireCourseData,
   setTotalNoOfLectures,
 } from "../utils/viewCourseSlice"
+import VideoDetails from "../components/core/ViewCourse/VideoDetailsSlider";
 export default function ViewCourse() {
   const { courseId } = useParams();
   const { token } = useSelector((state) => state.auth);
@@ -20,8 +21,7 @@ export default function ViewCourse() {
   useEffect(() => {
     (async () => {
       const courseData = await getFullDetailsOfCourse(courseId, token);
-    console.log("Course Data here... ", courseData)  
-      dispatch(setCourseSectionData(courseData.courseDetails?.courseContent));
+      dispatch(setCourseSectionData(courseData.courseContent));
       dispatch(setEntireCourseData(courseData));
       dispatch(setCompletedLectures(courseData));
       let lectures = 0;
@@ -30,16 +30,15 @@ export default function ViewCourse() {
       });
       dispatch(setTotalNoOfLectures(lectures));
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <div className="relative flex min-h-[calc(100vh-3.5rem)]">
         <VideoDetailsSidebar setReviewModal={setReviewModal} />
-        <div className="h-[calc(100vh-3.5rem)] flex-1 overflow-auto">
+        <div className="hidden lg:block h-[calc(100vh-3.5rem)] flex-1 overflow-auto">
           <div className="mx-6">
-            <Outlet />
+            <VideoDetails/>
           </div>
         </div>
       </div>

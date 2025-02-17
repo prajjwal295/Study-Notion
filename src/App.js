@@ -25,6 +25,7 @@ import CourseDetails from "./pages/CourseDetails";
 import Cat from "./pages/Cat";
 import ViewCourse from "./pages/ViewCourse";
 import PrivateRoute from "./hooks/PrivateRoute";
+import PurchaseHistory from "./components/core/Dashboard/PurchaseHistory";
 
 const App = () => {
   const { user } = useSelector((store) => store.profile);
@@ -67,10 +68,13 @@ const App = () => {
             />
           )}
           {user !== null && user.accountType === ACCOUNT_TYPE.STUDENT && (
+            <>
             <Route
               path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
               element={<ViewCourse />}
             />
+            <Route path="dashboard/purchase-history" element={<PurchaseHistory/>}/>
+            </>
           )}
           {user !== null && user.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
             <>
