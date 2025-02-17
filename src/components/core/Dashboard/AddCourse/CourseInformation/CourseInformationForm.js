@@ -36,8 +36,8 @@ const CourseInformationForm = () => {
 
   useEffect(() => {
     const getCategories = async () => {
-      //   setLoading(true);
       const categories = await fetchCourseCategories(token);
+
 
       if (categories?.length > 0) {
         setCourseCategories(categories);
@@ -74,9 +74,9 @@ const CourseInformationForm = () => {
 
     if (editCourse) {
       const currentValues = getValues();
-      console.log("changes after editing form values:", currentValues);
-      console.log("now course:", course);
-      console.log("Has Form Changed:", isFormUpdated());
+      // console.log("changes after editing form values:", currentValues);
+      // console.log("now course:", course);
+      // console.log("Has Form Changed:", isFormUpdated());
       if (isFormUpdated()) {
         const currentValues = getValues();
         const formData = new FormData();
@@ -162,6 +162,7 @@ const CourseInformationForm = () => {
           id="courseTitle"
           placeholder="Enter Course Title"
           {...register("courseTitle", { required: true })}
+          defaultValue={editCourse ? course.courseName : ""} 
           className="form-style w-full"
         />
         {errors.courseTitle && (
@@ -179,6 +180,7 @@ const CourseInformationForm = () => {
           id="courseShortDesc"
           placeholder="Enter Description"
           {...register("courseShortDesc", { required: true })}
+          defaultValue={editCourse ? course.courseDescription : ""} 
           className="form-style resize-x-none min-h-[130px] w-full"
         />
         {errors.courseShortDesc && (
@@ -203,6 +205,7 @@ const CourseInformationForm = () => {
                 value: /^(0|[1-9]\d*)(\.\d+)?$/,
               },
             })}
+            defaultValue={editCourse ? course.price : ""} 
             className="form-style w-full !pl-12"
           />
           <HiOutlineCurrencyRupee className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-richblack-400" />
@@ -268,6 +271,7 @@ const CourseInformationForm = () => {
           id="courseBenefits"
           placeholder="Enter benefits of the course"
           {...register("courseBenefits", { required: true })}
+          defaultValue={editCourse ? course.courseBenefits : ""} 
           className="form-style resize-x-none min-h-[130px] w-full"
         />
         {errors.courseBenefits && (

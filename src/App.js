@@ -29,7 +29,10 @@ import PrivateRoute from "./hooks/PrivateRoute";
 const App = () => {
   const { user } = useSelector((store) => store.profile);
   return (
-    <div className="max-w-screen min-h-screen bg-richblack-900 flex flex-col font-inter w-full h-full">
+    <div className="max-w-screen
+    min-h-screen bg-richblack-900
+     flex flex-col 
+    font-inter w-full h-full">
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />

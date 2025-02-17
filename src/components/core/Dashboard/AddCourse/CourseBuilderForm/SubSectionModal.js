@@ -109,9 +109,7 @@ export default function SubSectionModal({
     formData.append("video", data.lectureVideo);
     setLoading(true);
     const result = await createSubSection(formData, token);
-    // console.log(result);
     if (result) {
-      // update the structure of course
       const updatedCourseContent = course.courseContent.map((section) =>
         section._id === modalData ? result : section
       );
@@ -122,6 +120,64 @@ export default function SubSectionModal({
     setLoading(false);
   };
 
+
+  // const onSubmit = async (data) => {
+  //   if (view) return;
+  
+  //   if (edit) {
+  //     if (!isFormUpdated()) {
+  //       toast.error("No changes made to the form");
+  //     } else {
+  //       handleEditSubsection();
+  //     }
+  //     return;
+  //   }
+  //   console.log({data})
+
+  //   var file = data.lectureVideo;
+  
+  //   if (!file) {
+  //     toast.error("No file selected!");
+  //     return;
+  //   }
+  
+  //   const chunkSize = 20 * 1024 * 1024; 
+  //   const totalChunks = Math.ceil(file.size / chunkSize);
+  
+  //   setLoading(true);
+  
+  //   for (let i = 0; i < totalChunks; i++) {
+  //     const chunk = file.slice(i * chunkSize, (i + 1) * chunkSize);
+  
+  //     const formData = new FormData();
+  //     formData.append("sectionId", modalData);
+  //     formData.append("title", data.lectureTitle);
+  //     formData.append("description", data.lectureDesc);
+  //     formData.append("file", chunk);
+  //     formData.append("chunkNumber", i);
+  //     formData.append("totalChunks", totalChunks);
+  
+  //     try {
+  //       const result = await createSubSection(formData, token);
+
+  //       if (i === totalChunks - 1 && result) {
+  //         const updatedCourseContent = course.courseContent.map((section) =>
+  //           section._id === modalData ? result : section
+  //         );
+  //         const updatedCourse = { ...course, courseContent: updatedCourseContent };
+  //         dispatch(setCourse(updatedCourse));
+  //       }
+  //     } catch (error) {
+  //       console.error("Upload failed:", error);
+  //       toast.error("Upload failed. Please try again.");
+  //       setLoading(false);
+  //       return;
+  //     }
+  //   }
+  //   setModalData(null);
+  //   setLoading(false);
+  // };
+  
   return (
     <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
       <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-richblack-400 bg-richblack-800">

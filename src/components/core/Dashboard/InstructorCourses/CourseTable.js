@@ -12,6 +12,7 @@ import { fetchInstructorCourses } from "../../../../services/operations/CourseAp
 import { COURSE_STATUS } from "../../../../utils/constants";
 import ConfirmationModal from "../../../common/ConfirmationModal";
 import { deleteCourse } from "../../../../services/operations/CourseApi";
+import { Link } from "react-router-dom";
 
 export default function CourseTable({ courses, setCourses }) {
   const dispatch = useDispatch();
@@ -75,15 +76,17 @@ export default function CourseTable({ courses, setCourses }) {
                   />
                   <div className="flex flex-col justify-between">
                     <p className="text-lg font-semibold text-richblack-5">
-                      {course.courseName}
+                      <Link to={`/courses/${course._id}`} className="hover:underline">
+                        {course.courseName}
+                      </Link>
                     </p>
                     <p className="text-xs text-richblack-300">
                       {course.courseDescription.split(" ").length >
-                      TRUNCATE_LENGTH
+                        TRUNCATE_LENGTH
                         ? course.courseDescription
-                            .split(" ")
-                            .slice(0, TRUNCATE_LENGTH)
-                            .join(" ") + "..."
+                          .split(" ")
+                          .slice(0, TRUNCATE_LENGTH)
+                          .join(" ") + "..."
                         : course.courseDescription}
                     </p>
                     <p className="text-[12px] text-white">
@@ -132,10 +135,10 @@ export default function CourseTable({ courses, setCourses }) {
                         btn2Text: "Cancel",
                         btn1Handler: !loading
                           ? () => handleCourseDelete(course._id)
-                          : () => {},
+                          : () => { },
                         btn2Handler: !loading
                           ? () => setConfirmationModal(null)
-                          : () => {},
+                          : () => { },
                       });
                     }}
                     title="Delete"

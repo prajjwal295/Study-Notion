@@ -26,6 +26,8 @@ export const fetchCourseCategories = async () => {
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
+
+    console.log(response)
     result = response.data.allCategory;
   } catch (error) {
     console.log("GET_USER_ENROLLED_COURSES_API API ERROR............", error);
