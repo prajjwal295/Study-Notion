@@ -23,7 +23,7 @@ const Port = process.env.PORT || 4000;
 database.connect();
 
 const corsOptions = {
-  origin: ["http://localhost:8000", "https://study-notion-prajjwal.vercel.app"],
+  origin: ["http://localhost:8000", "https://study-notion-prajjwal.vercel.app" ,"http://localhost:4000"],
   credentials: true,
 };
 
