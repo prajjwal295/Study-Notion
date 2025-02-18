@@ -35,67 +35,67 @@ export async function buyCourse(
   dispatch
 ) {
   const toastId = toast.loading("Loading...");
-  try {
-    //load the script
-    // const res = await loadScript(
-    //   "https://checkout.razorpay.com/v1/checkout.js"
-    // );
+  // try {
+  //   //load the script
+  //   // const res = await loadScript(
+  //   //   "https://checkout.razorpay.com/v1/checkout.js"
+  //   // );
 
-    // if (!res) {
-    //   toast.error("RazorPay SDK failed to load");
-    //   return;
-    // }
+  //   // if (!res) {
+  //   //   toast.error("RazorPay SDK failed to load");
+  //   //   return;
+  //   // }
 
-    // //initiate the order(capture payment)
-    // const orderResponse = await apiConnector(
-    //   "POST",
-    //   COURSE_PAYMENT_API,
-    //   { courses },
-    //   {
-    //     Authorization: `Bearer ${token}`,
-    //   }
-    // );
+  //   // //initiate the order(capture payment)
+  //   // const orderResponse = await apiConnector(
+  //   //   "POST",
+  //   //   COURSE_PAYMENT_API,
+  //   //   { courses },
+  //   //   {
+  //   //     Authorization: `Bearer ${token}`,
+  //   //   }
+  //   // );
 
-    // if (!orderResponse.data.success) {
-    //   throw new Error(orderResponse.data.message);
-    // }
-    console.log("PRINTING orderResponse", orderResponse);
-    //options
-    const options = {
-      key: process.env.RAZORPAY_KEY,
-      currency: orderResponse.data.message.currency,
-      amount: `${orderResponse.data.message.amount}`,
-      order_id: orderResponse.data.message.id,
-      name: "StudyNotion",
-      description: "Thank You for Purchasing the Course",
-      image: rzpLogo,
-      prefill: {
-        name: `${userDetails.firstName}`,
-        email: userDetails.email,
-      },
-      handler: function (response) {
-        //send successful wala mail
-        sendPaymentSuccessEmail(
-          response,
-          orderResponse.data.message.amount,
-          token
-        );
-        //verifyPayment
-        verifyPayment({ ...response, courses }, token, navigate, dispatch);
-      },
-    };
-    //miss hogya tha
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
-    paymentObject.on("payment.failed", function (response) {
-      toast.error("oops, payment failed");
-      console.log(response.error);
-    });
-  } catch (error) {
-    console.log("PAYMENT API ERROR.....", error);
-    toast.error("Could not make Payment");
-  }
-  toast.dismiss(toastId);
+  //   // if (!orderResponse.data.success) {
+  //   //   throw new Error(orderResponse.data.message);
+  //   // }
+  //   console.log("PRINTING orderResponse", orderResponse);
+  //   //options
+  //   const options = {
+  //     key: process.env.RAZORPAY_KEY,
+  //     currency: orderResponse.data.message.currency,
+  //     amount: `${orderResponse.data.message.amount}`,
+  //     order_id: orderResponse.data.message.id,
+  //     name: "StudyNotion",
+  //     description: "Thank You for Purchasing the Course",
+  //     image: rzpLogo,
+  //     prefill: {
+  //       name: `${userDetails.firstName}`,
+  //       email: userDetails.email,
+  //     },
+  //     handler: function (response) {
+  //       //send successful wala mail
+  //       sendPaymentSuccessEmail(
+  //         response,
+  //         orderResponse.data.message.amount,
+  //         token
+  //       );
+  //       //verifyPayment
+  //       verifyPayment({ ...response, courses }, token, navigate, dispatch);
+  //     },
+  //   };
+  //   //miss hogya tha
+  //   const paymentObject = new window.Razorpay(options);
+  //   paymentObject.open();
+  //   paymentObject.on("payment.failed", function (response) {
+  //     toast.error("oops, payment failed");
+  //     console.log(response.error);
+  //   });
+  // } catch (error) {
+  //   console.log("PAYMENT API ERROR.....", error);
+  //   toast.error("Could not make Payment");
+  // }
+  // toast.dismiss(toastId);
 }
 
 export async function enrollCourse(

@@ -13,6 +13,7 @@ export default function MyCourses() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
+ 
     const fetchCourses = async () => {
       const result = await fetchInstructorCourses(token);
       if (result) {

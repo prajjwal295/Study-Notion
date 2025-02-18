@@ -17,10 +17,7 @@ exports.auth = (req, res, next) => {
         message: "token missing",
       });
     }
-
-    //   verify the token
     try {
-      // paylod-->
       const decode = jwt.verify(token, process.env.JWT_SECRET);
       req.user = decode;
     } catch (error) {
@@ -36,7 +33,7 @@ exports.auth = (req, res, next) => {
   } catch (error) {
     return res.status(401).json({
       success: false,
-      message: "token verification authentication error",
+      message: "token verification authentication error",error
     });
   }
 };

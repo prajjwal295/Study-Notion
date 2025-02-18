@@ -73,6 +73,7 @@ const App = () => {
               path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
               element={<ViewCourse />}
             />
+            <Route path="add-review/:courseId" element={<></>}/>
             <Route path="dashboard/purchase-history" element={<PurchaseHistory/>}/>
             </>
           )}

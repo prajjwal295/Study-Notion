@@ -54,3 +54,9 @@ export const studentEndpoints = {
   // short cut
   COURSE_ENROLLMENT_API: BASE_URL + "/payment/EnrollStudent",
 };
+
+export const RatingAndReviewEndpoints = {
+  GET_COURSERATINGBYID_API : BASE_URL + "/rating/getCourseRatingById",
+  CREATE_RATINGS_API : BASE_URL + "/rating/createRating",
+  UPDATE_RATINGS_API : BASE_URL + "/rating/updateRating",
+}
